@@ -1,0 +1,30 @@
+# --- Secrets: never commit ---
+.env
+.env.*
+!.env.example
+
+# --- Scraped / cached data ---
+# Raw HTML is third-party content and can be large; it stays local only.
+data/raw/*
+!data/raw/.gitkeep
+# Cached LLM responses and the review queue are regenerable working files.
+data/cache/
+data/review_queue.jsonl
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

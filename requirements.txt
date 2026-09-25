@@ -1,0 +1,22 @@
+# Minimum versions. After installing, lock exact versions with:
+#   pip freeze > requirements.lock.txt
+
+# Config and scraping
+python-dotenv>=1.0
+requests>=2.32
+beautifulsoup4>=4.12
+lxml>=5.0
+
+# Data and analysis
+pandas>=2.2
+pyarrow>=16.0
+statsmodels>=0.14
+matplotlib>=3.9
+
+# LLM layer: validation plus the Gemini SDK (only imported when Gemini is used)
+pydantic>=2.7
+google-genai>=1.0
+
+# Dev
+pytest>=8.0
+jupyter>=1.0

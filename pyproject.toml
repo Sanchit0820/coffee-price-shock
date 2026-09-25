@@ -1,0 +1,10 @@
+[project]
+name = "coffee-price-shock"
+version = "0.1.0"
+description = "Retail price pass-through of the 2024-25 arabica spike across Indian specialty roasters"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+# Lets tests `import src...` from the project root.
+pythonpath = ["."]
+testpaths = ["tests"]
