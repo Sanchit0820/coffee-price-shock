@@ -32,6 +32,10 @@ data/raw, data/clean, src/, notebooks/, outputs/
 - `src/scout.py`: Phase 1 check of robots / Shopify / Wayback coverage per roaster
   → `data/roasters_scout.csv` (`python -m src.scout [--refresh]`). CDX normalises
   http/https and www, so one query per URL covers all variants.
+- `docs/feasibility.md`: Phase 1 findings. Historical prices come from Shopify's
+  embedded `var meta` object on archived collection pages (prices in paise);
+  product pages are the fallback. `data/roasters_final.csv` is the chosen list,
+  with switch windows to check by hand.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content
