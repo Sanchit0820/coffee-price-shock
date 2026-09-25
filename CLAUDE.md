@@ -35,4 +35,4 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 0: setup and scaffolding
+Phase 1: roaster selection
