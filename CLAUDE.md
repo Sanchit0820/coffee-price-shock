@@ -29,6 +29,9 @@ data/raw, data/clean, src/, notebooks/, outputs/
 - `src/http_client.py`: `fetch(url)` is the only way to hit the web (cache, robots, rate limit)
 - `src/llm/`: `extract(provider, prompt, schema, row_id)` (in `client.py`) for all LLM calls;
   providers implement `LLMProvider` (`base.py`); Gemini lives in `gemini.py`
+- `src/scout.py`: Phase 1 check of robots / Shopify / Wayback coverage per roaster
+  → `data/roasters_scout.csv` (`python -m src.scout [--refresh]`). CDX normalises
+  http/https and www, so one query per URL covers all variants.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content

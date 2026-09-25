@@ -28,6 +28,7 @@ _session = requests.Session()
 _session.headers["User-Agent"] = USER_AGENT
 _limiter = RateLimiter(config.SCRAPE_DELAY_SECONDS)
 _robots: dict[str, RobotFileParser] = {}  # host -> parsed robots.txt, fetched once per run
+_robots_status: dict[str, str] = {}       # host -> "found" / "missing" / "blocked" / "error"
 
 
 class DisallowedByRobots(Exception):
@@ -73,16 +74,16 @@ def _write_cache(url: str, response: requests.Response) -> None:
 
 # ---------- robots.txt ----------
 
-def _load_robots(scheme: str, host: str) -> RobotFileParser:
-    """Download and parse robots.txt for a host.
+def _load_robots(scheme: str, host: str) -> tuple[RobotFileParser, str]:
+    """Download and parse robots.txt for a host; return (parser, status).
 
     We download it with our own session (not RobotFileParser.read()) so the
     request carries our User-Agent and timeout. Status handling follows the
     robots.txt standard (RFC 9309):
-      - 200         -> obey the rules in the file
-      - 401 / 403   -> treat the whole site as off-limits
-      - other 4xx   -> no robots.txt, everything allowed
-      - 5xx / error -> unsure, so be conservative and treat as off-limits
+      - 200         -> "found":   obey the rules in the file
+      - 401 / 403   -> "blocked": treat the whole site as off-limits
+      - other 4xx   -> "missing": no robots.txt, everything allowed
+      - 5xx / error -> "error":   unsure, so be conservative and treat as off-limits
     """
     parser = RobotFileParser()
     _limiter.wait(host)
@@ -90,29 +91,47 @@ def _load_robots(scheme: str, host: str) -> RobotFileParser:
         resp = _session.get(f"{scheme}://{host}/robots.txt", timeout=20)
     except requests.RequestException:
         parser.disallow_all = True
-        return parser
+        return parser, "error"
 
     if resp.status_code == 200:
         parser.parse(resp.text.splitlines())
-    elif resp.status_code in (401, 403) or resp.status_code >= 500:
+        return parser, "found"
+    if resp.status_code in (401, 403):
         parser.disallow_all = True
-    else:
-        parser.allow_all = True
-    return parser
+        return parser, "blocked"
+    if resp.status_code >= 500:
+        parser.disallow_all = True
+        return parser, "error"
+    parser.allow_all = True
+    return parser, "missing"
 
 
 def _robots_for(url: str) -> RobotFileParser:
     parts = urlsplit(url)
     if parts.netloc not in _robots:
-        _robots[parts.netloc] = _load_robots(parts.scheme, parts.netloc)
+        parser, status = _load_robots(parts.scheme, parts.netloc)
+        _robots[parts.netloc] = parser
+        _robots_status[parts.netloc] = status
     return _robots[parts.netloc]
 
 
 # ---------- public API ----------
 
-def fetch(url: str) -> bytes:
-    """Return the body of `url`, from cache if possible, else politely from the web."""
-    cached = _read_cache(url)
+def robots_check(url: str) -> tuple[bool, str]:
+    """Return (allowed, robots_status) for `url` without fetching the page itself."""
+    robots = _robots_for(url)
+    return robots.can_fetch(USER_AGENT, url), _robots_status[urlsplit(url).netloc]
+
+
+def fetch(url: str, refresh: bool = False, timeout: float = 30) -> bytes:
+    """Return the body of `url`, from cache if possible, else politely from the web.
+
+    refresh=True skips the cache and re-downloads, overwriting the cached copy.
+    Use it only for data that changes over time (e.g. Wayback snapshot lists),
+    never for pages we want frozen as evidence.
+    timeout is in seconds; raise it for slow services like the Wayback CDX API.
+    """
+    cached = None if refresh else _read_cache(url)
     if cached is not None:
         return cached
 
@@ -124,7 +143,7 @@ def fetch(url: str) -> bytes:
     crawl_delay = robots.crawl_delay(USER_AGENT) or 0
     _limiter.wait(urlsplit(url).netloc, max(config.SCRAPE_DELAY_SECONDS, float(crawl_delay)))
 
-    response = _session.get(url, timeout=30)
+    response = _session.get(url, timeout=timeout)
     response.raise_for_status()  # 4xx/5xx -> exception, and nothing is cached
     _write_cache(url, response)
     return response.content

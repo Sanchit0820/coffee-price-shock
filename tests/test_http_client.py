@@ -33,6 +33,7 @@ def fake_web(tmp_path, monkeypatch):
     monkeypatch.setattr(http_client._limiter, "min_interval", 0)
     monkeypatch.setattr(config, "SCRAPE_DELAY_SECONDS", 0)
     http_client._robots.clear()
+    http_client._robots_status.clear()
     return requested
 
 
@@ -46,3 +47,17 @@ def test_second_fetch_uses_cache(fake_web):
 def test_robots_disallow_is_respected(fake_web):
     with pytest.raises(http_client.DisallowedByRobots):
         http_client.fetch("https://roaster.example/private/prices")
+
+
+def test_robots_check_reports_status_without_fetching_page(fake_web):
+    assert http_client.robots_check("https://roaster.example/shop") == (True, "found")
+    assert http_client.robots_check("https://roaster.example/private/x") == (False, "found")
+    assert all(u.endswith("robots.txt") for u in fake_web)
+
+
+def test_refresh_bypasses_cache(fake_web):
+    url = "https://roaster.example/products/beans"
+    http_client.fetch(url)
+    http_client.fetch(url, refresh=True)
+    page_requests = [u for u in fake_web if not u.endswith("robots.txt")]
+    assert page_requests == [url, url]
