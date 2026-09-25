@@ -36,6 +36,12 @@ def test_summarise_counts_quarters_and_earliest():
     assert out["shop_earliest"] == "2023-03-01"
 
 
+def test_archive_urls_can_exclude_current_page():
+    shop, extras = "https://s.example/pages/coffee", ["https://s.example/collections/beans"]
+    assert scout.archive_urls(shop, extras, include_shop_url=True) == [shop] + extras
+    assert scout.archive_urls(shop, extras, include_shop_url=False) == extras
+
+
 def test_products_json_validation():
     good = {"products": [{"title": "Beans", "variants": [{"price": "650.00"}]}]}
     assert scout.is_valid_products_json(json.dumps(good).encode())

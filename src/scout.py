@@ -151,8 +151,20 @@ def archive_snapshots(urls: list[str], refresh: bool) -> dict[str, str]:
     return merged
 
 
+def archive_urls(shop_url: str, extras: list[str], include_shop_url: bool) -> list[str]:
+    """Which URLs count towards Wayback coverage.
+
+    Normally the current shop page plus any older addresses. include_shop_url=False
+    drops the current page, for roasters whose current page was not a product
+    listing in the past (Subko's /pages/coffee was a brand-story page in 2023 and
+    never carries embedded product data), so its snapshots would inflate coverage.
+    """
+    return ([shop_url] if include_shop_url else []) + extras
+
+
 def scout_roaster(roaster: str, shop_url: str, quarters: list[str], refresh: bool,
-                  extra_archive_urls: list[str] | None = None) -> dict:
+                  extra_archive_urls: list[str] | None = None,
+                  include_shop_url: bool = True) -> dict:
     parts = urlsplit(shop_url)
     origin = f"{parts.scheme}://{parts.netloc}"
     record = {
@@ -179,7 +191,9 @@ def scout_roaster(roaster: str, shop_url: str, quarters: list[str], refresh: boo
 
         # The Wayback checks hit archive.org, not the roaster, so they run
         # even if the roaster's own robots.txt blocks us.
-        shop_snaps = archive_snapshots([shop_url] + (extra_archive_urls or []), refresh)
+        counted = archive_urls(shop_url, extra_archive_urls or [], include_shop_url)
+        record["archive_urls_counted"] = " | ".join(counted)
+        shop_snaps = archive_snapshots(counted, refresh)
         record.update(summarise(shop_snaps, quarters, "shop"))
         record["shop_variants_seen"] = " | ".join(sorted(set(shop_snaps.values())))
 
@@ -199,7 +213,7 @@ def output_columns(quarters: list[str]) -> list[str]:
     for prefix in ("shop", "pj"):
         cols += [f"{prefix}_{q}" for q in quarters]
         cols += [f"{prefix}_quarters_covered", f"{prefix}_earliest"]
-    return cols + ["shop_variants_seen", "scouted_at", "error"]
+    return cols + ["archive_urls_counted", "shop_variants_seen", "scouted_at", "error"]
 
 
 def read_candidates() -> list[dict]:
@@ -229,7 +243,11 @@ def main() -> None:
         print(f"Scouting {row['roaster']} ...", flush=True)
         # Optional column: older addresses of the same page, separated by "|".
         extras = [u.strip() for u in (row.get("extra_archive_urls") or "").split("|") if u.strip()]
-        record = scout_roaster(row["roaster"], row["shop_url"].strip(), quarters, args.refresh, extras)
+        # Optional column: "no" = don't count the current shop page's snapshots
+        # (see archive_urls). Blank or anything else = count it.
+        include_shop = (row.get("archive_shop_url") or "").strip().lower() != "no"
+        record = scout_roaster(row["roaster"], row["shop_url"].strip(), quarters, args.refresh,
+                               extras, include_shop)
         # Copied through unchanged: when a stitched roaster moved from its old
         # URL/platform to the new one. A price or pack-size jump in this window
         # must be checked by hand before it counts as a real change.

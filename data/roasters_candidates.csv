@@ -1,19 +1,19 @@
-roaster,shop_url,extra_archive_urls,url_switch_window
-Blue Tokai,https://bluetokaicoffee.com/collections/roasted-and-ground-coffee-beans,https://bluetokaicoffee.com/collections/coffee,2024-04-18 to 2024-05-23 (collection renamed; same Shopify store)
-Subko,https://www.subko.coffee/pages/coffee,https://www.subko.coffee/collections/roasted-beans | https://www.subko.coffee/collections/specialty-arabica-microlots,2024-Q2 (roasted-beans archive ends; specialty-arabica-microlots overlaps 2023-Q1 to 2025-Q3 but covers microlots only)
-Araku,https://www.arakucoffee.in/collections/coffee,,
-Corridor Seven,https://corridorseven.coffee/collections/all,,
-Black Baza,https://www.blackbazacoffee.com/collections/coffee,https://store.blackbazacoffee.com/collections/all-coffee,2025-03-19 to 2025-07-20 (store.blackbazacoffee.com -> www; platform change; no 2025Q2 data)
-Devans,https://www.devans.in/collections/coffee,,
-Bloom,https://bloomcoffeeroasters.in/collections/coffee,,
-Savorworks,https://www.savorworksroasters.com/collections/coffee,,
-Dope Coffee,https://dopecoffee.in/pages/shop-dope,https://dopecoffee.in/collections/coffee,2026-03-07 (new page; old page still live in 2026Q1 so they overlap)
-Rossette Coffee Lab,https://rossettecoffee.com/collections/coffee,,
-Kapi Kottai,https://kapikottai.coffee/collections/all,,
-Grey Soul,https://greysoul.coffee/collections/coffee,,
-Maverick & Farmer,https://www.maverickandfarmer.com/collections/shop-all,,
-Seven Beans,https://sevenbeans.co/collections/coffee,,
-Beachville,https://beachvillecoffee.com/collections/all-coffees,,
-Third Wave Coffee,https://www.thirdwavecoffeeroasters.com/collections/coffee-beans,,
-Toise Coffee,https://toise.coffee/collections/frontpage,,
-Caramelly,https://caramelly.in/collections/roaster-market,,
+roaster,shop_url,extra_archive_urls,archive_shop_url,url_switch_window
+Blue Tokai,https://bluetokaicoffee.com/collections/roasted-and-ground-coffee-beans,https://bluetokaicoffee.com/collections/coffee,,2024-04-18 to 2024-05-23 (collection renamed; same Shopify store)
+Subko,https://www.subko.coffee/pages/coffee,https://www.subko.coffee/collections/roasted-beans | https://www.subko.coffee/collections/specialty-arabica-microlots,no,after 2024-Q2 (roasted-beans archive ends; microlots-only collection continues)
+Araku,https://www.arakucoffee.in/collections/coffee,,,
+Corridor Seven,https://corridorseven.coffee/collections/all,,,
+Black Baza,https://www.blackbazacoffee.com/collections/coffee,https://store.blackbazacoffee.com/collections/all-coffee,,2025-03-19 to 2025-07-20 (store subdomain -> www; platform change; no 2025-Q2 data)
+Devans,https://www.devans.in/collections/coffee,,,
+Bloom,https://bloomcoffeeroasters.in/collections/coffee,,,
+Savorworks,https://www.savorworksroasters.com/collections/coffee,,,
+Dope Coffee,https://dopecoffee.in/pages/shop-dope,https://dopecoffee.in/collections/coffee,no,2026-03-07 (new /pages/shop-dope; old collection still live in 2026-Q1)
+Rossette Coffee Lab,https://rossettecoffee.com/collections/coffee,,,
+Kapi Kottai,https://kapikottai.coffee/collections/all,,,
+Grey Soul,https://greysoul.coffee/collections/coffee,,,
+Maverick & Farmer,https://www.maverickandfarmer.com/collections/shop-all,,,
+Seven Beans,https://sevenbeans.co/collections/coffee,,,
+Beachville,https://beachvillecoffee.com/collections/all-coffees,,,
+Third Wave Coffee,https://www.thirdwavecoffeeroasters.com/collections/coffee-beans,,,
+Toise Coffee,https://toise.coffee/collections/frontpage,,,
+Caramelly,https://caramelly.in/collections/roaster-market,,,

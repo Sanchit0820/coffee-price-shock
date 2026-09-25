@@ -8,6 +8,11 @@ Checked September 2026. Scout output: `data/roasters_scout.csv`. Final list: `da
    `/products.json` works (Shopify), and count Wayback snapshots per quarter
    of the beans listing page from 2023-Q1. Older addresses of the same page
    (`extra_archive_urls` in `data/roasters_candidates.csv`) are merged in.
+   Where the current shop URL is a content page that was never a product
+   listing with embedded data (Subko `/pages/coffee`, Dope `/pages/shop-dope`),
+   `archive_shop_url = no` excludes it, so coverage counts only listing pages.
+   The `archive_urls_counted` column shows exactly which URLs each count uses,
+   and the counts match `data/roasters_final.csv`.
 2. **Feasibility sample** (one-off script, not the scraper): for each shortlisted
    roaster, open the earliest archived listing snapshot from 2023 and from 2025
    (raw `id_` snapshots, i.e. the HTML as originally served) and check:
@@ -86,6 +91,26 @@ What the unsized variants are:
   interpolate prices.
 - **Visible-text parsing fails on JavaScript-rendered 2023 pages** (Third
   Wave, Black Baza), so it cannot be the primary method.
+
+## Final list and tiers
+
+`data/roasters_final.csv` (column `tier`):
+
+- **Core (7), used for the main pass-through results:** Third Wave, Devans,
+  Blue Tokai, Grey Soul, Kapi Kottai, Araku, Corridor Seven. Embedded variant
+  data with sizes in both years, and no high-risk URL switch.
+- **Secondary (4), each with a named caveat:** Black Baza (high-risk platform
+  switch in 2025), Dope (pack size only from page text), Bloom (patchy
+  coverage), Subko (line-up narrows to microlots; sizes from product pages).
+
+Main results are reported on the core 7. Re-running them on all 11 is the
+robustness check: if the conclusions hold with and without the secondary
+group, they don't depend on the roasters with weaker data.
+
+Dropped: Seven Beans and Savorworks (no 2023 listing snapshot), Rossette
+(robots.txt unreachable), Maverick & Farmer and Caramelly (coverage starts
+after the spike began), Beachville and Toise (almost no snapshots), KC Roasters
+and Home Country (no online shop / not found).
 
 ## Switch windows (stitched roasters)
 
