@@ -40,6 +40,10 @@ data/raw, data/clean, src/, notebooks/, outputs/
   `data/clean/variants_long.csv` + `coverage_report.csv`; `python -m src.size_report`
   finds pack-size changes. Modules: `quarters`, `wayback`, `shopify_meta`, `sizes`,
   `coffee_filter`, `flags`, `product_pages`, `fallback`, `collect`, `size_report`.
+- Input costs: `python -m src.costs` reads the newest `data/external/CMO-*_<date>.xlsx`
+  (World Bank) and `DEXINUS_<date>.csv` (FRED) -> `data/clean/input_costs_quarterly.csv`
+  (₹ green-bean cost per 100 g roasted; roast loss 18% assumed, `--roast-loss`).
+  New downloads go in `data/external/` with the download date in the filename.
 - Data rules: exclude `served_outside_quarter` rows from quarter-level
   aggregation; filter `partial` quarters before comparing line-ups; don't link
   by variant ID across an `id_break`; treat low-confidence size changes as artifacts;

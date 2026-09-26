@@ -10,6 +10,7 @@ lxml>=5.0
 # Data and analysis
 pandas>=2.2
 pyarrow>=16.0
+openpyxl>=3.1   # read the World Bank Pink Sheet (.xlsx)
 statsmodels>=0.14
 matplotlib>=3.9
 

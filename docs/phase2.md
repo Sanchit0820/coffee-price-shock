@@ -24,6 +24,7 @@ new requests (apart from robots.txt checks, which aren't cached).
 | `product_page_sizes.csv` | Stage 2 results per product-quarter (status, snapshot, size per variant) |
 | `product_handles.csv` | Product ID → URL handle and how it was found |
 | `size_changes.csv` | Pack-size changes between consecutive observed quarters, with `confidence` |
+| `input_costs_quarterly.csv` | Green-coffee input costs per quarter, ₹ per 100 g roasted, with 1–3 quarter lags (see "Input costs") |
 
 ## Method
 
@@ -116,6 +117,54 @@ Black Baza +7%, Corridor Seven −6%) look like whole-catalogue repricing; check
   changes are high confidence.
 
 **Bundles:** 1,215 rows across 25 products (`is_bundle = True`), all coffee.
+
+## Input costs (`src/costs.py`)
+
+```
+python -m src.costs [--roast-loss 0.18]  ->  data/clean/input_costs_quarterly.csv
+```
+
+**Sources** (in `data/external/`; the filename carries the download date, and
+the loader uses the newest file of each kind):
+
+| File | Source | Series | Units | Frequency |
+|---|---|---|---|---|
+| `CMO-Historical-Data-Monthly_2026-09-27.xlsx` | World Bank Commodity Price Data ("Pink Sheet"), edition updated 2 Sep 2026, "Monthly Prices" sheet | `Coffee, Arabica` (ICO indicator, other mild Arabicas, avg New York and Bremen/Hamburg, ex-dock); `Coffee, Robusta` (ICO indicator, avg New York and Le Havre/Marseilles, ex-dock) | US$/kg, nominal | Monthly, to 2026M08 |
+| `DEXINUS_2026-09-27.csv` | FRED (Federal Reserve Bank of St. Louis), series DEXINUS | Indian rupees to one US dollar, noon buying rates in New York | INR per USD | Daily, 2021-09-20 to 2026-09-18 |
+
+No Coffee Board of India data yet; global series only.
+
+**Method:**
+1. Daily INR/USD → monthly mean (blank holiday rows are skipped, not zeros).
+2. Per month: green ₹/kg = US$/kg × INR/USD.
+3. Per month: **roasted ₹ per 100 g = green ₹/kg ÷ (1 − roast_loss) ÷ 10**.
+4. Quarter = mean of its months' rupee values (each month's price at that
+   month's rate, not average price × average rate), labelled like
+   `variants_long.csv` ("2024Q3"). `months_in_quarter < 3` marks a partial
+   quarter: **2026Q3 has July–August only**.
+5. `_lag1`, `_lag2`, `_lag3` = the roasted cost 1, 2 or 3 quarters earlier,
+   computed before trimming to 2022Q1 onward.
+
+**Assumption: roast loss = 18%** (`roast_loss` column, `--roast-loss` flag).
+Roasting typically removes 15–20% of green-bean weight (mostly water), so
+1 kg of roasted coffee needs 1 / (1 − 0.18) ≈ 1.22 kg of green. This
+is a single assumed value for all roasters and roast levels; darker roasts
+lose more. It scales every rupee figure by the same factor, so it changes
+levels, not percentage changes over time.
+
+**Units in the output:** `*_usd_kg` US$/kg green; `inr_per_usd` rupees per
+dollar; `*_green_inr_kg` ₹/kg green; `*_roasted_inr_100g` ₹ of green bean per
+100 g roasted.
+
+**Caveats:**
+- **Green-bean cost only.** No roasting, packaging, labour, shipping, GST or
+  margin, so it is a cost *driver*, not a cost of goods.
+- **Global benchmarks.** Indian specialty roasters mostly buy Indian estate
+  coffee, whose prices only partly follow ICO prices. Coffee Board data
+  would be the better local series if it becomes available.
+- **Earliest lags use a partial quarter.** The FX series starts 20 Sep 2021,
+  so 2021Q3 is one partial month; it only feeds 2022Q1 `lag2` and 2022Q2
+  `lag3`. Analysis from 2023Q1 onward is unaffected.
 
 ## Known gaps
 
