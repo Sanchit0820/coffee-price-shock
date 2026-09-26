@@ -23,6 +23,7 @@ from urllib.parse import urlencode, urlsplit
 import requests
 
 from src import config, http_client
+from src.quarters import quarter_labels, quarter_of  # noqa: F401 (quarter_labels re-exported)
 
 CANDIDATES = config.DATA_DIR / "roasters_candidates.csv"
 OUTPUT = config.DATA_DIR / "roasters_scout.csv"
@@ -31,26 +32,6 @@ START_YEAR = 2023
 # The CDX API can take over a minute on sites with few captures (Toise timed
 # out twice at 30 s but answered "no snapshots" in a browser), so allow longer.
 CDX_TIMEOUT_SECONDS = 120
-
-
-# ---------- quarters ----------
-
-def quarter_of(year: int, month: int) -> str:
-    # Months 1-3 -> Q1, 4-6 -> Q2, ... ((month - 1) // 3 is 0..3)
-    return f"{year}Q{(month - 1) // 3 + 1}"
-
-
-def quarter_labels(start_year: int, today: date) -> list[str]:
-    """All quarters from start_year Q1 up to and including today's quarter."""
-    current = quarter_of(today.year, today.month)
-    labels = []
-    for year in range(start_year, today.year + 1):
-        for q in range(1, 5):
-            label = f"{year}Q{q}"
-            labels.append(label)
-            if label == current:
-                return labels
-    return labels
 
 
 # ---------- Wayback CDX ----------

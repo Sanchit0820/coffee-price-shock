@@ -72,6 +72,14 @@ def _write_cache(url: str, response: requests.Response) -> None:
     meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
 
+def cached_meta(url: str) -> dict | None:
+    """The metadata saved with a cached response (final_url, fetched_at, ...), if cached."""
+    _, meta_path = _cache_paths(url)
+    if not meta_path.exists():
+        return None
+    return json.loads(meta_path.read_text(encoding="utf-8"))
+
+
 # ---------- robots.txt ----------
 
 def _load_robots(scheme: str, host: str) -> tuple[RobotFileParser, str]:
