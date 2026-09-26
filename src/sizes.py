@@ -20,6 +20,26 @@ class Size:
     multipack: bool     # True for "2 x 500 gms"
 
 
+_PACK_OF = re.compile(r"\bpack\s+of\s+(\d+)\b", re.IGNORECASE)
+
+
+def pack_count(text: str | None) -> int | None:
+    """N from "(Pack of N)" in a product title, e.g. "SKIA Coffee (Pack of 2)" -> 2."""
+    m = _PACK_OF.search(text or "")
+    return int(m.group(1)) if m else None
+
+
+def apply_pack_count(size: Size, count: int | None) -> Size:
+    """Per-bag size x "Pack of N" -> total, flagged multipack.
+
+    Skipped if the size is already a multipack ("2 x 500 gms"), so a pack
+    count is never applied twice.
+    """
+    if not count or count < 2 or size.multipack:
+        return size
+    return Size(grams=size.grams * count, multipack=True)
+
+
 def parse_size_grams(text: str | None) -> Size | None:
     """First pack size in `text`, converted to grams; None if there isn't one.
 

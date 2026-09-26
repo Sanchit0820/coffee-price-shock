@@ -22,12 +22,12 @@ from urllib.parse import urlsplit
 import pandas as pd
 
 from src import config, fallback, http_client, scout, wayback
-from src.coffee_filter import is_coffee_guess
+from src.coffee_filter import is_bundle, is_coffee_guess
 from src.flags import (ID_BREAK_BELOW, compare_live, completeness, id_carryover,
-                       in_switch_window, mark_sales, uniform_listing_size)
+                       in_switch_window, mark_sales, price_outliers, uniform_listing_size)
 from src.quarters import quarter_labels, quarter_of_date
 from src.shopify_meta import extract_meta_products, variant_rows
-from src.sizes import parse_size_grams
+from src.sizes import apply_pack_count, pack_count, parse_size_grams
 
 FINAL = config.DATA_DIR / "roasters_final.csv"
 SCOUT = config.DATA_DIR / "roasters_scout.csv"
@@ -45,7 +45,7 @@ VARIANT_COLUMNS = [
     "roaster", "tier", "quarter", "source_type", "requested_ts", "served_ts",
     "served_outside_quarter", "source_url", "page", "product_id", "product_title",
     "product_type", "variant_id", "variant_title", "sku", "price_inr",
-    "compare_at_price_inr", "size_grams", "multipack", "size_source", "is_coffee_guess",
+    "compare_at_price_inr", "size_grams", "multipack", "size_source", "is_coffee_guess", "is_bundle",
     "in_switch_window", "variant_ids_stable", "sale_suspected",
 ]
 
@@ -87,26 +87,45 @@ def load_roasters() -> list[dict]:
 # ---------- sizes and coffee flag ----------
 
 def resolve_size(variant_title: str, product_title: str, page_size) -> tuple:
-    """(grams, multipack, source): variant title, then product title, then page-wide size."""
-    for text, source in ((variant_title, "variant_title"), (product_title, "product_title")):
-        s = parse_size_grams(text)
-        if s:
-            return s.grams, s.multipack, source
-    if page_size:
-        return page_size.grams, page_size.multipack, "listing_text"
-    return None, None, ""
+    """(Size or None, source): variant title, then product title, then page-wide size.
+
+    A "(Pack of N)" in the product title multiplies a per-bag size into the
+    total ("SKIA Coffee (Pack of 2)" with variant "200g" -> 400 g, multipack).
+    """
+    size, source = None, ""
+    for text, src in ((variant_title, "variant_title"), (product_title, "product_title")):
+        size = parse_size_grams(text)
+        if size:
+            source = src
+            break
+    if size is None and page_size:
+        size, source = page_size, "listing_text"
+    if size is not None:
+        size = apply_pack_count(size, pack_count(product_title))
+    return size, source
 
 
-def finish_row(row: dict, page_size=None) -> dict:
-    grams, multipack, source = resolve_size(row["variant_title"], row["product_title"], page_size)
+def finish_row(row: dict, page_size=None, bundle_by_price: bool = False) -> dict:
+    """Add size, bundle and coffee labels to a parsed variant row.
+
+    bundle_by_price: set on single-size shops for products priced far above the
+    page median (Dope's multi-coffee bundles); they get no page-wide size.
+    """
+    bundle = is_bundle(row["product_title"]) or bundle_by_price
+    size, source = resolve_size(row["variant_title"], row["product_title"],
+                                None if bundle_by_price else page_size)
+    grams, multipack = (size.grams, size.multipack) if size else (None, None)
     if grams is None and row.get("_live_grams"):
-        # products.json "grams" is SHIPPING weight (can include packaging), so
-        # it's only a last resort and labelled as such.
+        # products.json "grams" is SHIPPING weight (can include packaging, or a
+        # bundle's total), so it's only a last resort and labelled as such.
         grams, multipack, source = row["_live_grams"], False, "live_shipping_grams"
     row.pop("_live_grams", None)
+    coffee = is_coffee_guess(row["product_title"], row["product_type"], grams is not None, bundle)
     row.update(size_grams=grams, multipack=multipack, size_source=source,
-               is_coffee_guess=is_coffee_guess(row["product_title"], row["product_type"],
-                                               grams is not None))
+               is_coffee_guess=coffee,
+               # A bundle is several COFFEES; a non-coffee item (e.g. a
+               # "Subscribe - 6 Coffees" plan) is never counted as one.
+               is_bundle=bundle and coffee is not False)
     return row
 
 
@@ -139,9 +158,14 @@ def fetch_listing_pages(page1_html: str, served_ts: str, listing_url: str,
 
 def rows_from_page(html, roaster, label, requested_ts, served_ts, url, page) -> list[dict]:
     products = extract_meta_products(html) or []
-    page_size = uniform_listing_size(html) if roaster["roaster"] in SINGLE_SIZE_ROASTERS else None
+    single_size = roaster["roaster"] in SINGLE_SIZE_ROASTERS
+    page_size = uniform_listing_size(html) if single_size else None
+    parsed = variant_rows(products)
+    # On single-size shops, products priced far above the page median are
+    # multi-bag bundles: no page-wide size for them, and is_bundle = True.
+    outliers = price_outliers([v["price_inr"] for v in parsed]) if single_size else [False] * len(parsed)
     rows = []
-    for v in variant_rows(products):
+    for v, outlier in zip(parsed, outliers):
         v.update(roaster=roaster["roaster"], tier=roaster["tier"], quarter=label,
                  source_type="archive", requested_ts=requested_ts, served_ts=served_ts,
                  served_outside_quarter=wayback.ts_quarter(served_ts) != label,
@@ -150,7 +174,7 @@ def rows_from_page(html, roaster, label, requested_ts, served_ts, url, page) -> 
                                                    wayback.ts_date(served_ts)),
                  variant_ids_stable=True,  # set False later if an ID break is detected
                  sale_suspected="")
-        rows.append(finish_row(v, page_size))
+        rows.append(finish_row(v, page_size, bundle_by_price=outlier))
     return rows
 
 
@@ -197,7 +221,7 @@ def collect_live(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
     """
     parts = urlsplit(roaster["live_url"])
     label = quarter_of_date(date.today())
-    rows, fetched_at = [], ""
+    raw, fetched_at = [], ""   # rows are finished after all pages are read (see below)
     for page in range(1, LIVE_MAX_PAGES + 1):
         url = f"{parts.scheme}://{parts.netloc}{parts.path}/products.json?limit=250&page={page}"
         products = json.loads(http_client.fetch(url)).get("products", [])
@@ -208,7 +232,7 @@ def collect_live(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
             handles.live[(roaster["roaster"], str(p["id"]))] = p["handle"]
             for v in p["variants"]:
                 title = "" if v.get("title") == "Default Title" else v.get("title", "")
-                rows.append(finish_row({
+                raw.append({
                     "roaster": roaster["roaster"], "tier": roaster["tier"], "quarter": label,
                     "source_type": "live", "requested_ts": "", "served_ts": fetched_at,
                     "served_outside_quarter": False, "source_url": url, "page": page,
@@ -225,7 +249,11 @@ def collect_live(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
                     "sale_suspected": str(bool(v.get("compare_at_price") and v.get("price")
                                                and float(v["compare_at_price"]) > float(v["price"]))),
                     "_live_grams": v.get("grams") or None,
-                }))
+                })
+    # The single-size bundle check needs every live price first, to find the median.
+    single_size = roaster["roaster"] in SINGLE_SIZE_ROASTERS
+    outliers = price_outliers([r["price_inr"] for r in raw]) if single_size else [False] * len(raw)
+    rows = [finish_row(r, bundle_by_price=o) for r, o in zip(raw, outliers)]
     served = fetched_at[:10].replace("-", "")
     cov = coverage_row(roaster, label, "live", "", served, roaster["live_url"], rows,
                        pages_expected="", pages_found="", missing_pages="", completeness="live")
@@ -287,6 +315,7 @@ def coverage_row(roaster, label, source_type, requested_ts, served_ts, url, rows
         "pct_sized": pct(sum(r["size_grams"] is not None for r in rows)),
         "pct_non_coffee": pct(sum(r["is_coffee_guess"] is False for r in rows)),
         "pct_coffee_ambiguous": pct(sum(r["is_coffee_guess"] is None for r in rows)),
+        "pct_bundle": pct(sum(r["is_bundle"] for r in rows)),
     }
 
 
@@ -315,7 +344,8 @@ def apply_product_page_sizes(rows: list[dict]) -> int:
             row.update(size_grams=float(hit.size_grams), multipack=hit.multipack == "True",
                        size_source=hit.size_source)
             # Having a size is one input to the coffee guess, so redo it.
-            row["is_coffee_guess"] = is_coffee_guess(row["product_title"], row["product_type"], True)
+            row["is_coffee_guess"] = is_coffee_guess(row["product_title"], row["product_type"],
+                                                     True, row["is_bundle"])
             filled += 1
     return filled
 
@@ -355,6 +385,7 @@ def refresh_size_coverage(coverage: list[dict], rows: list[dict]) -> None:
             c["pct_sized"] = round(100 * sum(r["size_grams"] is not None for r in g) / n, 1)
             c["pct_non_coffee"] = round(100 * sum(r["is_coffee_guess"] is False for r in g) / n, 1)
             c["pct_coffee_ambiguous"] = round(100 * sum(r["is_coffee_guess"] is None for r in g) / n, 1)
+            c["pct_bundle"] = round(100 * sum(r["is_bundle"] for r in g) / n, 1)
 
 
 def live_or_error(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:

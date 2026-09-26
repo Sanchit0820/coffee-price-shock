@@ -42,7 +42,8 @@ data/raw, data/clean, src/, notebooks/, outputs/
   `coffee_filter`, `flags`, `product_pages`, `fallback`, `collect`, `size_report`.
 - Data rules: exclude `served_outside_quarter` rows from quarter-level
   aggregation; filter `partial` quarters before comparing line-ups; don't link
-  by variant ID across an `id_break`; treat low-confidence size changes as artifacts.
+  by variant ID across an `id_break`; treat low-confidence size changes as artifacts;
+  exclude `is_bundle` rows from price-per-gram analysis.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content

@@ -40,7 +40,27 @@ new requests (apart from robots.txt checks, which aren't cached).
    printed on the listing → stage 2 product page for the same quarter
    (variant title/options → the one size in the product text → shipping
    weight). `size_source` records which.
-5. **Live:** `/collections/<handle>/products.json`, labelled with the current
+5. **Coffee, bundles and multipacks** (`src/coffee_filter.py`, `src/sizes.py`):
+   - `is_coffee_guess` = False only for genuinely non-coffee items (equipment,
+     other drinks and formats such as drip bags and concentrates, pantry items
+     like cardamom and jaggery, subscriptions and kits). None = ambiguous.
+   - `is_bundle` = several coffees sold as one product (samplers, trios,
+     "N-in-1", "... Bundle", gift boxes, "Coffees (Pack of 3)"). Bundles are
+     coffee, but **exclude them from price-per-gram work**: their size is per
+     bag or a total across different coffees. Matched on the product title
+     only, because some shops use the type loosely (Black Baza types single
+     cardamom and jaggery as "Bundles"). A non-coffee item is never a bundle.
+   - "(Pack of N)" on a single coffee is a multipack: per-bag size × N
+     (SKIA Coffee (Pack of 2): 2 × 200 g = 400 g, `multipack = True`).
+   - **Dope's page-wide size** is not applied to products priced above
+     **1.75× the page median**; they're marked `is_bundle` and left unsized.
+     **This threshold was fitted to Dope's own price gap**: its three
+     multi-coffee bundles (MOST WANTED DOPE, FOREIGN RETURN, ECCENTRIC EDITIONS)
+     sit at 1.99–2.79× the median, its dearest single coffee (DOUBLE BARREL)
+     at 1.43×. It is not a general rule; revisit it if applied to another shop.
+     The card text confirms two of the three ("These 3 have been...", "The 3
+     beans here..."); ECCENTRIC EDITIONS is inferred from price alone.
+6. **Live:** `/collections/<handle>/products.json`, labelled with the current
    quarter and `source_type=live`. Prices there are rupee strings, and `grams`
    is shipping weight (used only as a labelled last resort).
 
@@ -56,6 +76,12 @@ new requests (apart from robots.txt checks, which aren't cached).
   those roasters have `variant_ids_stable = False`. Match by name in Phase 3.
   Black Baza's domain move kept 90% of IDs, so no manual flag.
 - **Size changes with `confidence = low` are artifacts** until checked.
+- **Exclude `is_bundle` rows from price-per-gram analysis** (they stay in the data).
+- **Dope's listing cards show regular vs sale prices** ("Regular price
+  Rs. 1,520 / Sale price Rs. 1,240 / You Will Save Rs. 280"). The embedded
+  data only carries the price actually charged, so for Dope the visible card
+  text is a second source of sale information. Use it in Phase 3 when checking
+  whether a price drop was a sale.
 
 ## Results
 
@@ -84,13 +110,14 @@ Black Baza +7%, Corridor Seven −6%) look like whole-catalogue repricing; check
   150 → 200 and 250 → 400: variant IDs reassigned between sizes. Needs prices to judge.
 - **Menu changes (sizes added or dropped), high confidence:** Bloom 11,
   Third Wave 6, Araku 4, Blue Tokai 2, Black Baza 1.
-- **Low confidence = bundles** the non-coffee rules missed: Blue Tokai
-  "5-in-1 Explorer Pack", "The Monsoon Trio", "The Rich & Bold Trio Pack";
-  Dope "MOST WANTED DOPE". Their "size change" is per-bag vs total weight.
+- Bundles are excluded from the size report. Before `is_bundle` existed, 26
+  "changes" came from bundles (Blue Tokai trios / 5-in-1 pack, Dope MOST
+  WANTED): per-bag vs total weight, not pack-size decisions. All 167 remaining
+  changes are high confidence.
+
+**Bundles:** 1,215 rows across 25 products (`is_bundle = True`), all coffee.
 
 ## Known gaps
 
-- Bundles named "pack", "trio" or "N-in-1" are not caught by `is_coffee_guess`.
-- Dope's single-size rule gives bundles on its page the 250 g size.
 - Subko's line-up narrows to microlots after 2024Q2, and 40% of its rows have no size.
 - Coverage is uneven; missing quarters stay missing (no interpolation).

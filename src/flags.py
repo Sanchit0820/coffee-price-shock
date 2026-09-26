@@ -150,6 +150,23 @@ def compare_live(archive_latest: list[dict], live: list[dict]) -> dict:
 
 # ---------- page-wide size (Dope) ----------
 
+# Fitted to Dope's own prices: its three multi-coffee bundles sit at 1.99-2.79x
+# the page median, its dearest single coffee at 1.43x. 1.75 splits that gap.
+BUNDLE_PRICE_RATIO = 1.75
+
+
+def price_outliers(prices: list[float | None], ratio: float = BUNDLE_PRICE_RATIO) -> list[bool]:
+    """True for prices above `ratio` x the median of the list (likely multi-bag bundles).
+
+    Used only on single-size shops, where a product costing about double the
+    typical bag can't be one bag of the page's single size.
+    """
+    known = [p for p in prices if p is not None]
+    if not known:
+        return [False] * len(prices)
+    cutoff = ratio * statistics.median(known)
+    return [p is not None and p > cutoff for p in prices]
+
 def uniform_listing_size(html: str) -> Size | None:
     """The pack size if the listing's visible text shows exactly one distinct size.
 

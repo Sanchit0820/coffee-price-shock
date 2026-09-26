@@ -31,7 +31,13 @@ def confidence(source_before: str, source_after: str) -> str:
 
 
 def usable(v: pd.DataFrame) -> pd.DataFrame:
-    return v[(v.is_coffee_guess.astype(str) != "False")
+    """Coffee/ambiguous, single-coffee (not bundle), in-quarter rows with a size.
+
+    Bundles are left out: their size is per bag or a total across different
+    coffees, so a "change" is an artifact, not a pack-size decision.
+    """
+    bundle = (v.is_bundle.astype(str) == "True") if "is_bundle" in v else pd.Series(False, index=v.index)
+    return v[(v.is_coffee_guess.astype(str) != "False") & ~bundle
              & (v.served_outside_quarter.astype(str) != "True")
              & v.size_grams.notna()]
 

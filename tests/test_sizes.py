@@ -1,7 +1,7 @@
 """Size parser: every spelling seen in Phase 1, plus edge cases."""
 import pytest
 
-from src.sizes import Size, parse_size_grams
+from src.sizes import Size, apply_pack_count, pack_count, parse_size_grams
 
 
 @pytest.mark.parametrize("text, grams", [
@@ -35,6 +35,26 @@ def test_multipack_is_total_weight_and_flagged():
 ])
 def test_no_size(text):
     assert parse_size_grams(text) is None
+
+
+@pytest.mark.parametrize("title, n", [
+    ("SKIA Coffee (Pack of 2)", 2),
+    ("Central Washing Station Coffees (Pack of 5)", 5),
+    ("pack of 3", 3),
+    ("Monsoon Malabar AA", None),
+    ("Sampler Pack", None),
+    (None, None),
+])
+def test_pack_count(title, n):
+    assert pack_count(title) == n
+
+
+def test_apply_pack_count():
+    assert apply_pack_count(Size(200, False), 2) == Size(400, True)       # SKIA: 2 x 200 g
+    assert apply_pack_count(Size(200, False), None) == Size(200, False)
+    assert apply_pack_count(Size(200, False), 1) == Size(200, False)
+    # Already a multipack ("2 x 500 gms"): never multiplied twice.
+    assert apply_pack_count(Size(1000, True), 2) == Size(1000, True)
 
 
 def test_unit_must_be_a_whole_word():

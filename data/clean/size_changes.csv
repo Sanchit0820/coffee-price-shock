@@ -1,69 +1,4 @@
 level,roaster,product_id,product_title,variant_id,variant_title_before,variant_title_after,from_quarter,to_quarter,sizes_before,sizes_after,size_source_before,size_source_after,confidence
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505542711,Whole Bean,Whole Bean,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505542711,Whole Bean,Whole Bean,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505575479,Aeropress,Aeropress,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505575479,Aeropress,Aeropress,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505608247,Channi,Channi,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505608247,Channi,Channi,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505641015,Coffee Filter,Coffee Filter,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505641015,Coffee Filter,Coffee Filter,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505673783,Cold Brew,Cold Brew,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505673783,Cold Brew,Cold Brew,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505706551,Commercial Espresso,Commercial Espresso,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505706551,Commercial Espresso,Commercial Espresso,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505739319,French Press,French Press,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505739319,French Press,French Press,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505772087,Home Espresso,Home Espresso,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505772087,Home Espresso,Home Espresso,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505804855,Inverted Aeropress,Inverted Aeropress,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505804855,Inverted Aeropress,Inverted Aeropress,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505837623,Moka Pot,Moka Pot,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505837623,Moka Pot,Moka Pot,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505870391,Pourover,Pourover,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505870391,Pourover,Pourover,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505903159,South Indian Filter,South Indian Filter,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505903159,South Indian Filter,South Indian Filter,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,40244505935927,Turkish,Turkish,2023Q4,2024Q2,225.0,75.0,product_page_shipping_weight,product_page_text,low
-variant,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,40244505935927,Turkish,Turkish,2025Q4,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655953854519,Whole Bean,Whole Bean,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655953887287,Aeropress,Aeropress,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655953920055,Channi,Channi,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655953952823,Coffee Filter,Coffee Filter,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655953985591,Cold Brew,Cold Brew,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954018359,Commercial Espresso,Commercial Espresso,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954051127,French Press,French Press,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954083895,Home Espresso,Home Espresso,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954116663,Inverted Aeropress,Inverted Aeropress,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954149431,Moka Pot,Moka Pot,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954214967,Pourover,Pourover,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954247735,South Indian Filter,South Indian Filter,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,6953214869559,5-in-1 Explorer Pack,40655954280503,Turkish,Turkish,2026Q2,2026Q3,75.0,375.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243667511,Whole Bean,Whole Bean,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243700279,Aeropress,Aeropress,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243733047,Channi,Channi,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243765815,Coffee Filter,Coffee Filter,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243798583,Cold Brew,Cold Brew,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243831351,Commercial Espresso,Commercial Espresso,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243864119,French Press,French Press,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243896887,Home Espresso,Home Espresso,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243929655,Inverted Aeropress,Inverted Aeropress,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243962423,Moka Pot,Moka Pot,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771243995191,Pourover,Pourover,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771244027959,South Indian Filter,South Indian Filter,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Blue Tokai,7314721898551,The Monsoon Trio,41771244060727,Turkish,Turkish,2025Q3,2026Q3,75.0,225.0,product_page_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912817372,Whole Beans,Whole Beans,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912850140,Cold Brew,Cold Brew,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912882908,French Press,French Press,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912915676,Electric brewer,Electric brewer,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912948444,Pour Over,Pour Over,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394912981212,Aeropress,Aeropress,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394913013980,Moka Pot,Moka Pot,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,42394913046748,Turkish,Turkish,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,43388746072284,Channi,Channi,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,43388746105052,Inverted Aeropress,Inverted Aeropress,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,43388746137820,Home Espresso,Home Espresso,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,43388746170588,Commercial Espresso,Commercial Espresso,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
-variant,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,43388746203356,South Indian Filter,South Indian Filter,2025Q4,2026Q3,250.0,750.0,listing_text,live_shipping_grams,low
 variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439824581,250 GMS / Whole Bean,150 GMS / Whole Bean,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
 variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439857349,250 GMS / Pourover,150 GMS / Pourover,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
 variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439890117,250 GMS / French Press,150 GMS / French Press,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
@@ -198,12 +133,7 @@ product,Bloom,7308398985402,Balanoor Plantations - Kents (Washed) - Chikmagalur 
 product,Bloom,7385879838906,Meera - Medium Light Roast,,,,2023Q4,2025Q3,250 500 1000,250 1000,,,high
 product,Bloom,7437536493754,Greenland Estate (Washed) - Valparai (Tamil Nadu) - Medium Roast,,,,2024Q3,2025Q1,250 500 1000,250,,,high
 product,Blue Tokai,6568026243127,Howdia Estate,,,,2024Q2,2026Q3,250 500 1000,250,,,high
-product,Blue Tokai,6835135709239,The Rich & Bold Trio Pack-Coffee beans,,,,2023Q4,2024Q2,225,75,,,low
-product,Blue Tokai,6835135709239,The Rich & Bold Trio Pack,,,,2025Q4,2026Q3,75,225,,,low
-product,Blue Tokai,6953214869559,5-in-1 Explorer Pack,,,,2026Q2,2026Q3,75,375,,,low
 product,Blue Tokai,7215158755383,Raxidi Lobo Estate,,,,2025Q1,2025Q4,250,250 500 1000,,,high
-product,Blue Tokai,7314721898551,The Monsoon Trio,,,,2025Q3,2026Q3,75,225,,,low
-product,Dope Coffee,7544846909660,MOST WANTED DOPE 🚨🚨🚨,,,,2025Q4,2026Q3,250,750,,,low
 product,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),,,,2023Q3,2024Q3,250,150 250 500,,,high
 product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q2,2024Q3,150 250 500,250 500,,,high
 product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q3,2024Q4,250 500,250,,,high

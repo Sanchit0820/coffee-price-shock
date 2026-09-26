@@ -1,9 +1,11 @@
 """Completeness, switch windows, sale detection, live comparison, coffee guess."""
 from datetime import date
 
-from src.coffee_filter import is_coffee_guess
+import pytest
+
+from src.coffee_filter import is_bundle, is_coffee_guess
 from src.flags import (compare_live, completeness, id_carryover, in_switch_window,
-                       mark_sales, sale_status, uniform_listing_size)
+                       mark_sales, price_outliers, sale_status, uniform_listing_size)
 from src.sizes import Size
 
 
@@ -114,14 +116,61 @@ def test_uniform_listing_size():
     assert uniform_listing_size("<script>var x='500g'</script><p>no sizes</p>") is None
 
 
+# ---------- bundles ----------
+
+@pytest.mark.parametrize("title", [
+    # Every product the keyword preview caught, as approved:
+    "5-in-1 Explorer Pack",
+    "The Monsoon Trio",
+    "The Rich & Bold Trio Pack",
+    "Origin Unhurried: Chikmagalur Pack",
+    "Central Washing Station Coffees (Pack of 3)",   # plural "coffees"
+    "Customised Sampler Pack",
+    "BCR Custom Sample Pack of 3",
+    "Coffee Sampler Pack",
+    "4 X COFFEES",
+    "The Teenage Trail - Box of 13 Coffees",
+])
+def test_is_bundle(title):
+    assert is_bundle(title)
+
+
+@pytest.mark.parametrize("title", [
+    "SKIA Coffee (Pack of 2)",          # one coffee in two bags: a multipack, not a bundle
+    "Monsoon Malabar AA",
+    "Packed with Flavour Blend",        # "pack" must be a whole word
+    "Ampthill Downs: Lot #24 (Medium-Dark Roast)",
+    "Attihally Cardamom",               # Black Baza types this "Bundles"; type is ignored
+])
+def test_not_bundle(title):
+    assert not is_bundle(title)
+
+
+def test_pantry_items_are_not_coffee_but_honey_process_is():
+    assert is_coffee_guess("Attihally Cardamom", "Bundles", True) is False
+    assert is_coffee_guess("Dark Jaggery", "Bundles", True) is False
+    assert is_coffee_guess("Coffee Flour", "Bundles", True) is False
+    assert is_coffee_guess("Black Honey Coffee", "", True) is True
+
+
+def test_price_outliers_dope_gap():
+    # A Dope page: singles 400-750 (median 500); bundles 994-1344.
+    prices = [400, 450, 500, 500, 525, 750, 994, 1240, 1344]
+    assert price_outliers(prices) == [False] * 6 + [True] * 3
+    assert price_outliers([None, 500, 500, 2000]) == [False, False, False, True]  # None ignored
+    assert price_outliers([]) == []
+
+
 # ---------- coffee guess ----------
 
 def test_coffee_guess():
     assert is_coffee_guess("Monsoon Malabar AA", "Coffee", True) is True
     assert is_coffee_guess("Hario V60 Dripper", "Equipment", False) is False
     assert is_coffee_guess("Chicory Powder", "Coffee", True) is False       # strong beats type
-    assert is_coffee_guess("Customised Sampler Pack", "Coffee", False) is False
-    assert is_coffee_guess("4 X COFFEES", "", False) is False
+    # Bundles of coffees are coffee (is_bundle handles them), not non-coffee.
+    assert is_coffee_guess("Customised Sampler Pack", "", False, bundle=True) is True
+    assert is_coffee_guess("4 X COFFEES", "", False, bundle=True) is True
+    assert is_coffee_guess("Coffee + Mug Combo", "", False, bundle=True) is False  # mug wins
     assert is_coffee_guess("Dark Chocolate Espresso", "Coffee", True) is True  # tasting note
     assert is_coffee_guess("Dark Chocolate Espresso", "", True) is None       # can't tell
     assert is_coffee_guess("Kilpauk Standard", "", True) is True              # grams, no keyword
