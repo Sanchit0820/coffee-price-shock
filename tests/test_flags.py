@@ -66,6 +66,15 @@ def test_mark_sales_uses_observed_neighbours_across_gaps():
     assert rows[1]["sale_suspected"] == "candidate"
 
 
+def test_mark_sales_skips_rows_served_outside_their_quarter():
+    # The 2024Q2 row is really an older capture: it must not act as a neighbour.
+    rows = [row("2024Q1", 1, 500), {**row("2024Q2", 1, 100), "served_outside_quarter": True},
+            row("2024Q3", 1, 400), row("2024Q4", 1, 500), row("2025Q1", 1, 500)]
+    mark_sales(rows)
+    assert rows[1]["sale_suspected"] == "not_checkable"
+    assert rows[2]["sale_suspected"] == "candidate"   # neighbours are 2024Q1 and 2024Q4
+
+
 def test_mark_sales_ignores_live_rows():
     rows = [row("2024Q1", 1, 500), {**row("2026Q3", 1, 100), "source_type": "live",
                                     "sale_suspected": "False"}]

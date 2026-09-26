@@ -2,6 +2,7 @@
 
     python -m src.collect stage1            # archived listings + live products.json
     python -m src.collect stage2 --dry-run  # count product-page requests stage 2 would make
+    python -m src.collect stage2            # fetch product pages for missing sizes, then rebuild
 
 Stage 1 writes:
   data/clean/variants_long.csv    one row per variant per roaster-quarter (+ live)
@@ -20,7 +21,7 @@ from urllib.parse import urlsplit
 
 import pandas as pd
 
-from src import config, http_client, scout, wayback
+from src import config, fallback, http_client, scout, wayback
 from src.coffee_filter import is_coffee_guess
 from src.flags import (ID_BREAK_BELOW, compare_live, completeness, id_carryover,
                        in_switch_window, mark_sales, uniform_listing_size)
@@ -35,10 +36,6 @@ COVERAGE_OUT = config.CLEAN_DIR / "coverage_report.csv"
 HANDLES_OUT = config.CLEAN_DIR / "product_handles.csv"
 PAGE_WINDOW_DAYS = 30   # extra pages must be captured within ±30 days of page 1
 LIVE_MAX_PAGES = 5      # products.json pages of 250; no roaster has >1,250 products
-# Black Baza's variant IDs changed when it moved platform in 2025, so IDs can't
-# link old and new rows; Phase 3 matches those by product name instead. Other
-# roasters are added automatically if a catalogue rebuild is detected (see id_carryover).
-UNSTABLE_IDS = {"Black Baza"}
 # Shops that sell ONE pack size and print it only on the page (not in variant
 # data). Only for these may a size seen once on the listing fill every variant;
 # elsewhere a lone size on the page doesn't prove which product it belongs to.
@@ -151,7 +148,7 @@ def rows_from_page(html, roaster, label, requested_ts, served_ts, url, page) -> 
                  source_url=url, page=page, compare_at_price_inr=None,
                  in_switch_window=in_switch_window(roaster["url_switch_window"],
                                                    wayback.ts_date(served_ts)),
-                 variant_ids_stable=roaster["roaster"] not in UNSTABLE_IDS,
+                 variant_ids_stable=True,  # set False later if an ID break is detected
                  sale_suspected="")
         rows.append(finish_row(v, page_size))
     return rows
@@ -222,7 +219,7 @@ def collect_live(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
                     "price_inr": float(v["price"]) if v.get("price") else None,
                     "compare_at_price_inr": float(v["compare_at_price"]) if v.get("compare_at_price") else None,
                     "in_switch_window": False,
-                    "variant_ids_stable": roaster["roaster"] not in UNSTABLE_IDS,
+                    "variant_ids_stable": True,
                     # The live snapshot shows the sale state directly: on sale if
                     # the compare-at ("was") price is above the price.
                     "sale_suspected": str(bool(v.get("compare_at_price") and v.get("price")
@@ -295,17 +292,69 @@ def coverage_row(roaster, label, source_type, requested_ts, served_ts, url, rows
 
 # ---------- stages ----------
 
-def mark_id_continuity(name: str, a_rows: list[dict], l_rows: list[dict], a_cov: list[dict]) -> None:
+def apply_product_page_sizes(rows: list[dict]) -> int:
+    """Fill sizes (and compare-at prices) from stage 2's product pages, if it has run.
+
+    Matched on (roaster, product, quarter, variant), so each quarter gets the
+    size its own product-page snapshot showed. Returns how many rows were filled.
+    """
+    if not fallback.SIZES_OUT.exists():
+        return 0
+    pp = pd.read_csv(fallback.SIZES_OUT, dtype=str)
+    pp = pp[pp.variant_id.notna()]
+    lookup = {(r.roaster, r.product_id, r.quarter, r.variant_id): r for r in pp.itertuples()}
+    filled = 0
+    for row in rows:
+        hit = lookup.get((row["roaster"], str(row["product_id"]), row["quarter"],
+                          str(row["variant_id"])))
+        if hit is None or row["source_type"] != "archive":
+            continue
+        if pd.notna(hit.compare_at_price_inr):
+            row["compare_at_price_inr"] = float(hit.compare_at_price_inr)
+        if row["size_grams"] is None and pd.notna(hit.size_grams):
+            row.update(size_grams=float(hit.size_grams), multipack=hit.multipack == "True",
+                       size_source=hit.size_source)
+            # Having a size is one input to the coffee guess, so redo it.
+            row["is_coffee_guess"] = is_coffee_guess(row["product_title"], row["product_type"], True)
+            filled += 1
+    return filled
+
+
+def in_quarter(rows: list[dict]) -> list[dict]:
+    """Rows whose snapshot really falls in their quarter.
+
+    Rows with served_outside_quarter=True stay in the output (flagged) but are
+    left out of every quarter-level calculation: the archive served a capture
+    from another quarter (e.g. Dope "2026Q1" is really October 2025).
+    """
+    return [r for r in rows if not r["served_outside_quarter"]]
+
+
+def mark_id_continuity(a_rows: list[dict], l_rows: list[dict], a_cov: list[dict]) -> None:
     """Add id_carryover / id_break to coverage rows; if the roaster has any break,
     mark all its rows variant_ids_stable = False (IDs can't link across the break)."""
-    carry = id_carryover(a_rows)
+    carry = id_carryover(in_quarter(a_rows))
     for c in a_cov:
         share = carry.get(c["quarter"])
         c["id_carryover"] = share
         c["id_break"] = share is not None and share < ID_BREAK_BELOW
-    if name in UNSTABLE_IDS or any(c["id_break"] for c in a_cov):
+    if any(c["id_break"] for c in a_cov):
         for r in a_rows + l_rows:
             r["variant_ids_stable"] = False
+
+
+def refresh_size_coverage(coverage: list[dict], rows: list[dict]) -> None:
+    """Recompute %-sized / %-coffee after product-page sizes were applied."""
+    groups: dict[tuple, list[dict]] = {}
+    for r in rows:
+        groups.setdefault((r["roaster"], r["quarter"], r["source_type"]), []).append(r)
+    for c in coverage:
+        g = groups.get((c["roaster"], c["quarter"], c["source_type"]), [])
+        if g:
+            n = len(g)
+            c["pct_sized"] = round(100 * sum(r["size_grams"] is not None for r in g) / n, 1)
+            c["pct_non_coffee"] = round(100 * sum(r["is_coffee_guess"] is False for r in g) / n, 1)
+            c["pct_coffee_ambiguous"] = round(100 * sum(r["is_coffee_guess"] is None for r in g) / n, 1)
 
 
 def live_or_error(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
@@ -324,15 +373,19 @@ def stage1() -> None:
         a_rows, a_cov = collect_archive(roaster, handles)
         print(f"{roaster['roaster']}: live ...", flush=True)
         l_rows, l_cov = live_or_error(roaster, handles)
-        # Compare live prices with the latest archived quarter that has data.
-        observed = [c["quarter"] for c in a_cov if c["variant_count"]]
+        # Compare live prices with the latest archived quarter that has data
+        # (quarters served from outside their own quarter don't count).
+        observed = [c["quarter"] for c in a_cov
+                    if c["variant_count"] and not c["served_outside_quarter"]]
         if observed and l_rows:
             latest = observed[-1]
-            l_cov.update(compare_live([r for r in a_rows if r["quarter"] == latest], l_rows),
-                         live_compared_with=latest)
-        mark_id_continuity(roaster["roaster"], a_rows, l_rows, a_cov)
+            l_cov.update(compare_live([r for r in in_quarter(a_rows) if r["quarter"] == latest],
+                                      l_rows), live_compared_with=latest)
+        mark_id_continuity(a_rows, l_rows, a_cov)
         rows += a_rows + l_rows
         coverage += a_cov + [l_cov]
+    print(f"Sizes filled from product pages: {apply_product_page_sizes(rows)}")
+    refresh_size_coverage(coverage, rows)
     mark_sales(rows)
     pd.DataFrame(rows, columns=VARIANT_COLUMNS).to_csv(VARIANTS_OUT, index=False)
     pd.DataFrame(coverage).to_csv(COVERAGE_OUT, index=False)
@@ -376,7 +429,8 @@ def main() -> None:
     elif args.dry_run:
         stage2_dry_run()
     else:
-        raise SystemExit("stage2 fetching isn't built yet; run with --dry-run")
+        fallback.run()
+        stage1()  # rebuild outputs from cache with the product-page sizes applied
 
 
 if __name__ == "__main__":

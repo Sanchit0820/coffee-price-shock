@@ -80,8 +80,14 @@ def mark_sales(rows: list[dict]) -> None:
     """
     by_roaster: dict[str, list[dict]] = {}
     for r in rows:
-        if r["source_type"] == "archive":
-            by_roaster.setdefault(r["roaster"], []).append(r)
+        if r["source_type"] != "archive":
+            continue
+        if r.get("served_outside_quarter"):
+            # Its capture belongs to another quarter, so it can't be anyone's
+            # neighbour and can't be checked itself.
+            r["sale_suspected"] = "not_checkable"
+            continue
+        by_roaster.setdefault(r["roaster"], []).append(r)
     for roaster_rows in by_roaster.values():
         quarters = sorted({r["quarter"] for r in roaster_rows})
         price = {(r["variant_id"], r["quarter"]): r["price_inr"] for r in roaster_rows}

@@ -36,6 +36,13 @@ data/raw, data/clean, src/, notebooks/, outputs/
   embedded `var meta` object on archived collection pages (prices in paise);
   product pages are the fallback. `data/roasters_final.csv` is the chosen list,
   with switch windows to check by hand.
+- Phase 2 (`docs/phase2.md`): `python -m src.collect stage1|stage2` builds
+  `data/clean/variants_long.csv` + `coverage_report.csv`; `python -m src.size_report`
+  finds pack-size changes. Modules: `quarters`, `wayback`, `shopify_meta`, `sizes`,
+  `coffee_filter`, `flags`, `product_pages`, `fallback`, `collect`, `size_report`.
+- Data rules: exclude `served_outside_quarter` rows from quarter-level
+  aggregation; filter `partial` quarters before comparing line-ups; don't link
+  by variant ID across an `id_break`; treat low-confidence size changes as artifacts.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content
