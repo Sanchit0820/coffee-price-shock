@@ -54,4 +54,4 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 2: historical price collection
+Phase 3: LLM attribute extraction and product matching
