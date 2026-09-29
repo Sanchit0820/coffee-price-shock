@@ -1,0 +1,12 @@
+roaster,product_id,product_title,reasons
+Black Baza,4034302640207,Bird-Friendly Bundle,extraction failed validation twice (see review_queue.jsonl)
+Bloom,8455948730554,Moganad Estate - Black Honey - Yercaud - Light Roast,extraction failed validation twice (see review_queue.jsonl)
+Blue Tokai,1718179725367,Amaltas Blend,title changed within this product ID (possible page reuse)
+Devans,6657601274035,Mexico Altura Superior Chiapas Adelita,title changed within this product ID (possible page reuse)
+Devans,8414029316316,COLOMBIAN ARABICA COFFEE,title changed within this product ID (possible page reuse)
+Grey Soul,6661709332677,Coffee Drip bags (Med Roast),title changed within this product ID (possible page reuse)
+Grey Soul,7451014234309,Ultra Light Nagaland,title changed within this product ID (possible page reuse)
+Grey Soul,7549207773381,Kohima Naturals (Med Roast),title changed within this product ID (possible page reuse)
+Grey Soul,7549447798981,Attikan Nano LOT (Ultra Light Roast),title changed within this product ID (possible page reuse)
+Grey Soul,7973367644357,Fruit Naturals (Light Roast),title changed within this product ID (possible page reuse)
+Subko,8393753002138,"Pourtable Pourover [ Box of 6 ] (84g): The Project Pearl, Ratnagiri Estate, Karnataka",extraction failed validation twice (see review_queue.jsonl)

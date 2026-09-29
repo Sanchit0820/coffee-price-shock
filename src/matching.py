@@ -15,6 +15,8 @@ coffee got a new product ID. For each break:
   4. only high/medium-confidence "same" links are applied. Low-confidence
      answers and conflicts (one product linked to two) go to
      data/review/match_review.csv and are NOT linked.
+  5. a person's yes/no in the review file's your_decision column overrides
+     all of the above (linked_human / rejected_human) and survives re-runs.
 
 Outputs:
   data/clean/product_matches.csv    one row per product: product_key + how it was linked
@@ -42,6 +44,8 @@ PROMPT_VERSION = "match-v1"
 MIN_SIMILARITY = 0.5
 TOP_K = 3
 BATCH_SIZE = 10
+PAIR_KEY = ["roaster", "before_id", "after_id"]
+LINKED = {"linked", "linked_human"}
 
 
 # ---------- candidates ----------
@@ -202,6 +206,29 @@ def resolve(pairs: pd.DataFrame, decisions: dict[str, MatchDecision]) -> pd.Data
     return p
 
 
+def load_human_decisions(path=None) -> dict[tuple, str]:
+    """{(roaster, before_id, after_id): "yes"/"no"} from the review file's your_decision.
+
+    The review file is where decisions live, so they survive re-runs: the
+    code reads them back before rewriting the file.
+    """
+    path = path or REVIEW_OUT
+    if not path.exists():
+        return {}
+    r = pd.read_csv(path, dtype=str).fillna("")
+    r = r[r.your_decision.str.strip().str.lower().isin(["yes", "no"])]
+    return {tuple(k): d.strip().lower() for k, d in zip(r[PAIR_KEY].values.tolist(), r.your_decision)}
+
+
+def apply_human(p: pd.DataFrame, decisions: dict[tuple, str]) -> pd.DataFrame:
+    """A human yes/no overrides the model and the conflict rule: linked_human / rejected_human."""
+    p = p.copy()
+    p["human_decision"] = [decisions.get(tuple(k), "") for k in p[PAIR_KEY].values.tolist()]
+    p.loc[p.human_decision == "yes", "status"] = "linked_human"
+    p.loc[p.human_decision == "no", "status"] = "rejected_human"
+    return p
+
+
 def product_keys(products: pd.DataFrame, links: pd.DataFrame) -> dict[tuple, str]:
     """Union-find over linked pairs; key = "<roaster-slug>:<product_id first seen earliest>"."""
     parent = {(r.roaster, r.product_id): (r.roaster, r.product_id) for r in products.itertuples()}
@@ -231,22 +258,27 @@ def product_keys(products: pd.DataFrame, links: pd.DataFrame) -> dict[tuple, str
 
 def build_outputs(pairs: pd.DataFrame, info: pd.DataFrame, model: str) -> None:
     products = info.reset_index()
-    links = pairs[pairs.status == "linked"]
+    links = pairs[pairs.status.isin(LINKED)]
     keys = product_keys(products, links)
-    via = {(r.roaster, r.after_id): r for r in links.itertuples()}
+    # A new product can have several predecessors (duplicate old listings).
+    via: dict[tuple, list] = {}
+    for r in links.itertuples():
+        via.setdefault((r.roaster, r.after_id), []).append(r)
     rows = []
     for p in products.itertuples():
-        link = via.get((p.roaster, p.product_id))
+        found = via.get((p.roaster, p.product_id), [])
+        human = any(r.status == "linked_human" for r in found)
+        by_llm = any(r.method == "llm" for r in found) and not human
         rows.append({
             "roaster": p.roaster, "product_id": p.product_id, "product_title": p.product_title,
             "first_quarter": p.first_quarter, "last_quarter": p.last_quarter,
             "product_key": keys[(p.roaster, p.product_id)],
-            "linked_from_product_id": link.before_id if link else "",
-            "link_method": link.method if link else "",
-            "link_confidence": link.confidence if link else "",
-            "link_reason": link.reason if link else "",
-            "model": model if link is not None and link.method == "llm" else "",
-            "prompt_version": PROMPT_VERSION if link is not None and link.method == "llm" else "",
+            "linked_from_product_id": " | ".join(r.before_id for r in found),
+            "link_method": "human" if human else " | ".join(sorted({r.method for r in found})),
+            "link_confidence": "human" if human else " | ".join(r.confidence for r in found),
+            "link_reason": " | ".join(r.reason for r in found),
+            "model": model if by_llm else "",
+            "prompt_version": PROMPT_VERSION if by_llm else "",
         })
     pd.DataFrame(rows).to_csv(MATCHES_OUT, index=False)
     out = pairs.assign(model=[model if m == "llm" else "" for m in pairs.method],
@@ -255,8 +287,11 @@ def build_outputs(pairs: pd.DataFrame, info: pd.DataFrame, model: str) -> None:
     out.insert(5, "before_title", [title.get((r, b), "") for r, b in zip(out.roaster, out.before_id)])
     out.insert(6, "after_title", [title.get((r, a), "") for r, a in zip(out.roaster, out.after_id)])
     out.to_csv(CANDIDATES_OUT, index=False)
-    review = out[out.status.isin(["review", "conflict", "no_decision"])].copy()
-    review["your_decision"] = ""   # fill with yes / no
+    # Review file = everything still needing a person, plus everything a person
+    # has already decided (so decisions are kept and visible).
+    needs = out.status.isin(["review", "conflict", "no_decision"]) | (out.human_decision != "")
+    review = out[needs].copy()
+    review["your_decision"] = review.human_decision   # fill blanks with yes / no
     REVIEW_DIR.mkdir(parents=True, exist_ok=True)
     review.to_csv(REVIEW_OUT, index=False)
 
@@ -276,7 +311,7 @@ def main() -> None:
     from src.llm.gemini import GeminiProvider   # only needed for a real run
     provider = GeminiProvider()
     decisions = decide(provider, pairs, info)
-    resolved = resolve(pairs, decisions)
+    resolved = apply_human(resolve(pairs, decisions), load_human_decisions())
     build_outputs(resolved, info, provider.model)
     print(resolved.groupby(["roaster", "status"]).size().unstack(fill_value=0).to_string())
     print(f"Wrote {MATCHES_OUT.name}, {CANDIDATES_OUT.name} and {REVIEW_OUT}")

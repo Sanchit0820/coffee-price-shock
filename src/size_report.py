@@ -76,11 +76,32 @@ def product_changes(v: pd.DataFrame) -> list[dict]:
     return out
 
 
+def mark_product_splits(df: pd.DataFrame, keys: pd.DataFrame) -> pd.DataFrame:
+    """crosses_product_split = the product key differs between the two quarters,
+    i.e. the product ID's page was reused for another coffee in between, so this
+    is two coffees, not a size change. Marked, not dropped (Phase 3 key split)."""
+    # Archive key where the quarter has one, else the live key (2026Q3 is live-only).
+    ordered = keys.sort_values("source_type", kind="stable")   # "archive" < "live"
+    k = ordered.set_index(["roaster", "product_id", "quarter"]).product_key
+    k = k[~k.index.duplicated(keep="first")]
+    df = df.copy()
+    df["crosses_product_split"] = [
+        k.get((r.roaster, r.product_id, r.from_quarter)) != k.get((r.roaster, r.product_id, r.to_quarter))
+        for r in df.itertuples()]
+    return df
+
+
 def main() -> None:
     v = usable(pd.read_csv(VARIANTS, dtype={"product_id": str, "variant_id": str}))
     df = pd.DataFrame(variant_changes(v) + product_changes(v))
+    keys_file = config.CLEAN_DIR / "product_keys_by_quarter.csv"
+    if keys_file.exists():   # built in Phase 3 (src/product_keys.py)
+        df = mark_product_splits(df, pd.read_csv(keys_file, dtype=str))
     df.to_csv(OUT, index=False)
     print(f"Wrote {len(df)} size changes to {OUT}")
+    if "crosses_product_split" in df:
+        print(f"  crossing a product split (two coffees, not a size change): "
+              f"{int(df.crosses_product_split.sum())}")
 
 
 if __name__ == "__main__":

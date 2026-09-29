@@ -59,6 +59,29 @@ def test_resolve_statuses_and_conflicts():
                       "p5": "conflict", "p6": "conflict", "p7": "no_decision"}
 
 
+def test_human_decisions_override_model_and_conflicts(tmp_path):
+    from src.matching import apply_human, load_human_decisions
+    review = tmp_path / "match_review.csv"
+    pd.DataFrame({"roaster": ["R", "R", "R", "R"], "before_id": ["1", "2", "5", "9"],
+                  "after_id": ["11", "11", "15", "19"],
+                  "your_decision": ["yes", "Yes ", "no", ""]}).to_csv(review, index=False)
+    decisions = load_human_decisions(review)
+    assert decisions == {("R", "1", "11"): "yes", ("R", "2", "11"): "yes", ("R", "5", "15"): "no"}
+    p = pd.DataFrame({"roaster": ["R"] * 4, "before_id": ["1", "2", "5", "9"],
+                      "after_id": ["11", "11", "15", "19"],
+                      "status": ["conflict", "conflict", "linked", "rejected"]})
+    out = apply_human(p, decisions)
+    assert out.status.tolist() == ["linked_human", "linked_human", "rejected_human", "rejected"]
+
+
+def test_duplicate_old_listings_share_one_key():
+    prods = pd.DataFrame({"roaster": ["Devans"] * 3, "product_id": ["1", "2", "11"],
+                          "first_quarter": ["2023Q1", "2023Q2", "2024Q2"]})
+    links = pd.DataFrame({"roaster": ["Devans"] * 2, "before_id": ["1", "2"], "after_id": ["11", "11"]})
+    keys = product_keys(prods, links)
+    assert keys[("Devans", "1")] == keys[("Devans", "2")] == keys[("Devans", "11")] == "devans:1"
+
+
 def test_product_keys_follow_chains_to_the_earliest_product():
     prods = pd.DataFrame({"roaster": ["Grey Soul"] * 4, "product_id": ["1", "2", "3", "9"],
                           "first_quarter": ["2023Q1", "2023Q2", "2024Q1", "2023Q1"]})

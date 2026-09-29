@@ -105,8 +105,11 @@ Black Baza +7%, Corridor Seven −6%) look like whole-catalogue repricing; check
 
 **Pack-size changes** (`size_changes.csv`):
 - **Grey Soul (core), high confidence:** the same variant IDs relabelled
-  250 → 200 GMS and 500 → 400 GMS on 7 products, from 2024Q4 through 2025Q4.
-  The clearest shrinkflation signal in the data.
+  250 → 200 GMS and 500 → 400 GMS on **6** products, from 2024Q4 through 2025Q4.
+  (Corrected in Phase 3: an earlier version said 7, wrongly counting "Fruit
+  Naturals", whose sizes went *up*.) **Phase 3 re-check against the
+  title-change check: only 3 of the 6 are the same coffee across the cut**
+  (see docs/phase3.md, "Grey Soul size cuts re-checked").
 - **Grey Soul, unclear:** Badra 500 → 250, Biccode 250 → 150, Fruit Naturals
   150 → 200 and 250 → 400: variant IDs reassigned between sizes. Needs prices to judge.
 - **Menu changes (sizes added or dropped), high confidence:** Bloom 11,

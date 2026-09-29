@@ -36,6 +36,24 @@ def test_variant_change():
             ch[0]["sizes_before"], ch[0]["sizes_after"]) == ("11", "2024Q2", "2024Q3", 250, 200)
 
 
+def test_mark_product_splits():
+    from src.size_report import mark_product_splits
+    changes = pd.DataFrame({"roaster": ["G", "G"], "product_id": ["1", "2"],
+                            "from_quarter": ["2025Q1", "2025Q1"], "to_quarter": ["2025Q3", "2025Q3"]})
+    keys = pd.DataFrame({"roaster": ["G"] * 4, "product_id": ["1", "1", "2", "2"],
+                         "quarter": ["2025Q1", "2025Q3", "2025Q1", "2025Q3"],
+                         "source_type": ["archive"] * 4,
+                         "product_key": ["g:1", "g:1@2025Q3", "g:2", "g:2"]})
+    assert mark_product_splits(changes, keys).crosses_product_split.tolist() == [True, False]
+    # A live-only quarter must use the live key, not count as "missing = different".
+    live = pd.DataFrame({"roaster": ["G"], "product_id": ["3"], "from_quarter": ["2024Q2"],
+                         "to_quarter": ["2026Q3"]})
+    keys3 = pd.DataFrame({"roaster": ["G", "G"], "product_id": ["3", "3"],
+                          "quarter": ["2024Q2", "2026Q3"], "source_type": ["archive", "live"],
+                          "product_key": ["g:3", "g:3"]})
+    assert mark_product_splits(live, keys3).crosses_product_split.tolist() == [False]
+
+
 def test_confidence():
     assert confidence("variant_title", "variant_title") == "high"
     assert confidence("product_page_variant", "product_title") == "high"

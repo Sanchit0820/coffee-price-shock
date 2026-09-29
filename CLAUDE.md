@@ -44,14 +44,27 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (World Bank) and `DEXINUS_<date>.csv` (FRED) -> `data/clean/input_costs_quarterly.csv`
   (₹ green-bean cost per 100 g roasted; roast loss 18% assumed, `--roast-loss`).
   New downloads go in `data/external/` with the download date in the filename.
+- Hand labels (`src/labels.py`): Sanchit labels in `data/labels/hand_labels.xlsx`
+  (dropdowns, product_id as text); `python -m src.labels import` validates it and writes
+  `hand_labels.csv`. Never open the CSV in Excel (it corrupts product IDs). Labelling is
+  blind: don't show attribute output until labels are imported.
+- Phase 3 (`docs/phase3.md`): `src/product_inputs.py`, `src/extract_attributes.py`
+  (prompt attrs-v2, batch 5), `src/evaluate_labels.py`, `src/matching.py` (match-v1).
+  Accuracy is reported on held-out labels 21-100 only (1-20 shaped the prompt).
+  Don't change the prompt in response to held-out errors without saying so: that
+  turns the held-out set into a tuning set.
 - Data rules: exclude `served_outside_quarter` rows from quarter-level
   aggregation; filter `partial` quarters before comparing line-ups; don't link
   by variant ID across an `id_break`; treat low-confidence size changes as artifacts;
-  exclude `is_bundle` rows from price-per-gram analysis.
+  exclude `is_bundle` rows from price-per-gram analysis; follow a coffee over time
+  with `product_keys_by_quarter.csv` (split at page reuse), never raw product_id;
+  use `attributes_valid` before attaching attributes to a product-quarter.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 3: LLM attribute extraction and product matching
+Phase 3 (LLM attribute extraction and product matching) closed 2026-09-30.
+Next: Phase 4 (analysis) not started. Open decision: add a process/lot-word
+rule to the title-change check (it missed Grey Soul "Graded Naturals -> Graded Washed").

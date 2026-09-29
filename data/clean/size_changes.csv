@@ -1,168 +1,168 @@
-level,roaster,product_id,product_title,variant_id,variant_title_before,variant_title_after,from_quarter,to_quarter,sizes_before,sizes_after,size_source_before,size_source_after,confidence
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439824581,250 GMS / Whole Bean,150 GMS / Whole Bean,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439857349,250 GMS / Pourover,150 GMS / Pourover,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439890117,250 GMS / French Press,150 GMS / French Press,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439922885,250 GMS / Moka Pot,150 GMS / Moka Pot,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439955653,250 GMS / Aeropress,150 GMS / Aeropress,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439988421,250 GMS / Chemex,150 GMS / Chemex,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440021189,250 GMS / Espresso,150 GMS / Espresso,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440053957,250 GMS / Channi,150 GMS / Channi,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440086725,250 GMS / Cold Brew,150 GMS / Cold Brew,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440119493,250 GMS / South Indian Filter,150 GMS / South Indian Filter,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440152261,250 GMS / Electric Drip/ Siphon,150 GMS / Electric Drip/ Siphon,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499888325,500 GMS / Whole Bean,250 GMS / Whole Bean,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499921093,500 GMS / Pourover,250 GMS / Pourover,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499953861,500 GMS / French Press,250 GMS / French Press,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499986629,500 GMS / Chemex,250 GMS / Chemex,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500019397,500 GMS / Espresso,250 GMS / Espresso,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500052165,500 GMS / Channi,250 GMS / Channi,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500084933,500 GMS / Cold Brew,250 GMS / Cold Brew,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500117701,500 GMS / Moka Pot,250 GMS / Moka Pot,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500150469,500 GMS / Aeropress,250 GMS / Aeropress,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500183237,500 GMS / Electric Drip Coffee Machine,250 GMS / Electric Drip Coffee Machine,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500216005,500 GMS / South Indian Filter,250 GMS / South Indian Filter,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669043397,250 GMS / Whole Bean,200 GMS / Whole Bean,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669076165,250 GMS / Pourover,200 GMS / Pourover,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669108933,250 GMS / French Press,200 GMS / French Press,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669141701,250 GMS / Chemex,200 GMS / Chemex,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669174469,250 GMS / Espresso,200 GMS / Espresso,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669207237,250 GMS / Channi,200 GMS / Channi,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669240005,250 GMS / Cold Brew,200 GMS / Cold Brew,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669272773,250 GMS / Moka Pot,200 GMS / Moka Pot,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669305541,250 GMS / Aeropress,200 GMS / Aeropress,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669338309,250 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669371077,250 GMS / South Indian Filter,200 GMS / South Indian Filter,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669403845,500 GMS / Whole Bean,400 GMS / Whole Bean,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669436613,500 GMS / Pourover,400 GMS / Pourover,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669469381,500 GMS / French Press,400 GMS / French Press,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669502149,500 GMS / Chemex,400 GMS / Chemex,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669534917,500 GMS / Espresso,400 GMS / Espresso,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669567685,500 GMS / Channi,400 GMS / Channi,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669600453,500 GMS / Cold Brew,400 GMS / Cold Brew,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669633221,500 GMS / Moka Pot,400 GMS / Moka Pot,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669665989,500 GMS / Aeropress,400 GMS / Aeropress,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669698757,500 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669731525,500 GMS / South Indian Filter,400 GMS / South Indian Filter,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796019397,250 GMS / Whole Bean,200 GMS / Whole Bean,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796052165,250 GMS / Pourover,200 GMS / Pourover,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796084933,250 GMS / French Press,200 GMS / French Press,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796117701,250 GMS / Chemex,200 GMS / Chemex,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796150469,250 GMS / Espresso,200 GMS / Espresso,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796183237,250 GMS / Channi,200 GMS / Channi,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796216005,250 GMS / Cold Brew,200 GMS / Cold Brew,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796248773,250 GMS / Moka Pot,200 GMS / Moka Pot,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796281541,250 GMS / Aeropress,200 GMS / Aeropress,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796314309,250 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796347077,250 GMS / South Indian Filter,200 GMS / South Indian Filter,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796379845,500 GMS / Whole Bean,400 GMS / Whole Bean,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796412613,500 GMS / Pourover,400 GMS / Pourover,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796445381,500 GMS / French Press,400 GMS / French Press,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796478149,500 GMS / Chemex,400 GMS / Chemex,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796510917,500 GMS / Espresso,400 GMS / Espresso,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796543685,500 GMS / Channi,400 GMS / Channi,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796576453,500 GMS / Cold Brew,400 GMS / Cold Brew,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796609221,500 GMS / Moka Pot,400 GMS / Moka Pot,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796641989,500 GMS / Aeropress,400 GMS / Aeropress,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796674757,500 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796707525,500 GMS / South Indian Filter,400 GMS / South Indian Filter,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7451014234309,Ultra Light Nagaland,42241317273797,250 GMS / Whole Bean,200 GMS / Whole Bean,2023Q3,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086080197,150 GMS / Whole Bean,200 GMS / Whole Bean,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086112965,150 GMS / Pourover,200 GMS / Pourover,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086145733,150 GMS / French Press,200 GMS / French Press,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086211269,150 GMS / Chemex,200 GMS / Chemex,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086244037,150 GMS / Espresso,200 GMS / Espresso,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086276805,150 GMS / Channi,200 GMS / Channi,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086309573,150 GMS / Cold Brew,200 GMS / Cold Brew,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086342341,150 GMS / Moka Pot,200 GMS / Moka Pot,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086375109,150 GMS / Aeropress,200 GMS / Aeropress,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086407877,150 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086440645,150 GMS / South Indian Filter,200 GMS / South Indian Filter,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086473413,250 GMS / Whole Bean,400 GMS / Whole Bean,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086506181,250 GMS / Pourover,400 GMS / Pourover,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086538949,250 GMS / French Press,400 GMS / French Press,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086571717,250 GMS / Chemex,400 GMS / Chemex,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086604485,250 GMS / Espresso,400 GMS / Espresso,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086637253,250 GMS / Channi,400 GMS / Channi,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086670021,250 GMS / Cold Brew,400 GMS / Cold Brew,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086702789,250 GMS / Moka Pot,400 GMS / Moka Pot,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086735557,250 GMS / Aeropress,400 GMS / Aeropress,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086768325,250 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086833861,250 GMS / South Indian Filter,400 GMS / South Indian Filter,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187699397,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187732165,250 GMS / Pourover,200 GMS / Pourover,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187764933,250 GMS / French Press,200 GMS / French Press,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187797701,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187830469,250 GMS / Aeropress,200 GMS / Aeropress,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187896005,250 GMS / Espresso,200 GMS / Espresso,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187961541,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188059845,500 GMS / Whole Bean,400 GMS / Whole Bean,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188092613,500 GMS / Pourover,400 GMS / Pourover,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188125381,500 GMS / French Press,400 GMS / French Press,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188158149,500 GMS / Moka Pot,400 GMS / Moka Pot,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188190917,500 GMS / Aeropress,400 GMS / Aeropress,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188256453,500 GMS / Espresso,400 GMS / Espresso,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188321989,500 GMS / Cold Brew,400 GMS / Cold Brew,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465317871813,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465317904581,250 GMS / Pourover,200 GMS / Pourover,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465317937349,250 GMS / French Press,200 GMS / French Press,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465318002885,250 GMS / Espresso,200 GMS / Espresso,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465318068421,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465318101189,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,8228349837509,Strawberry in Loop,44465318133957,250 GMS / Aeropress,200 GMS / Aeropress,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862235845,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862268613,250 GMS / Pourover,200 GMS / Pourover,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862301381,250 GMS / French Press,200 GMS / French Press,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862366917,250 GMS / Espresso,200 GMS / Espresso,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862432453,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862465221,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862497989,250 GMS / Aeropress,200 GMS / Aeropress,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high
-product,Araku,8380902506816,Grand Reserve,,,,2025Q3,2025Q4,250,250 500 1000,,,high
-product,Araku,8380902539584,Signature,,,,2025Q3,2025Q4,250,250 500 1000,,,high
-product,Araku,8380902572352,Selection,,,,2025Q3,2025Q4,250,250 500 1000,,,high
-product,Araku,8380906176832,Micro Climate,,,,2025Q3,2025Q4,250,250 500 1000,,,high
-product,Black Baza,2489368838223,Otter,,,,2024Q2,2024Q3,250 500,250,,,high
-product,Bloom,6563619406010,Kenny Ji - The Cold Brew Blend,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6563740025018,Ro-Busta Rhymes - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6563766403258,Satchmo - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6563778035898,Vin Van Gogh - Medium Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6563812409530,Venkids Valley Estate (Washed) – Coorg - Medium Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6563822076090,Salawara Estate – Chikmaglur - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,6903892279482,Papakuchi Coffee (Washed) - Coorg (Light Roast),,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,7096363057338,Pulney Coffee (Washed) - Pulney Hills - Medium Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,7308398985402,Balanoor Plantations - Kents (Washed) - Chikmagalur - Medium Roast,,,,2023Q1,2023Q4,250 500,250 500 1000,,,high
-product,Bloom,7385879838906,Meera - Medium Light Roast,,,,2023Q4,2025Q3,250 500 1000,250 1000,,,high
-product,Bloom,7437536493754,Greenland Estate (Washed) - Valparai (Tamil Nadu) - Medium Roast,,,,2024Q3,2025Q1,250 500 1000,250,,,high
-product,Blue Tokai,6568026243127,Howdia Estate,,,,2024Q2,2026Q3,250 500 1000,250,,,high
-product,Blue Tokai,7215158755383,Raxidi Lobo Estate,,,,2025Q1,2025Q4,250,250 500 1000,,,high
-product,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),,,,2023Q3,2024Q3,250,150 250 500,,,high
-product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q2,2024Q3,150 250 500,250 500,,,high
-product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q3,2024Q4,250 500,250,,,high
-product,Grey Soul,7425831207109,Ell'sworth Black Honey (Light-Med Profile),,,,2024Q2,2024Q3,150 250 500,250 500,,,high
-product,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),,,,2023Q3,2024Q4,150 250 500,200 400,,,high
-product,Grey Soul,7450817396933,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),,,,2023Q3,2024Q2,150 250 500,250 500,,,high
-product,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),,,,2024Q2,2024Q4,250 500,200 400,,,high
-product,Grey Soul,7451014234309,Ultra Light Nagaland,,,,2023Q3,2025Q3,250 500,200 400,,,high
-product,Grey Soul,7451014234309,Ultra Light Nagaland,,,,2025Q3,2025Q4,200 400,200,,,high
-product,Grey Soul,7487855853765,Roasters Espresso 2.0 (Med-Dark Profile),,,,2024Q4,2025Q1,250 500 1000,500 1000,,,high
-product,Grey Soul,7487855853765,Roasters Espresso 2.0 (Med-Dark Profile),,,,2025Q1,2025Q2,500 1000,250 500 1000,,,high
-product,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),,,,2025Q3,2025Q4,250 500 1000,200,,,high
-product,Grey Soul,7549447798981,CATAUI NANO LOT (Light-Med Roast),,,,2024Q4,2025Q1,200,200 400,,,high
-product,Grey Soul,7549447798981,Attikan Nano LOT (Ultra Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high
-product,Grey Soul,7705499173061,Cold Brew Naturals (Med-Dark Profile),,,,2024Q4,2025Q1,250 500 1000,1000,,,high
-product,Grey Soul,7705499173061,Single Origin Cold Brew (Med-Dark Profile),,,,2025Q1,2025Q2,1000,200 400 1000,,,high
-product,Grey Soul,7705499173061,Single Origin Cold Brew (Med-Dark Roast),,,,2025Q3,2025Q4,200 400 1000,200,,,high
-product,Grey Soul,7973367644357,Fruit Naturals (Light Roast),,,,2025Q1,2025Q2,150 250 500,200 400,,,high
-product,Grey Soul,7973367644357,Fruit Naturals (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high
-product,Grey Soul,8031212044485,The Rose Coffee (72 Hour Fermented Naturals) (Light Roast),,,,2024Q3,2024Q4,200 400,200,,,high
-product,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),,,,2025Q1,2025Q3,250 500,200 400,,,high
-product,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high
-product,Grey Soul,8152190648517,Saccharomyces Anaerobic Naturals (Med Roast),,,,2024Q4,2025Q1,150 250 500,250 500,,,high
-product,Grey Soul,8228349837509,Strawberry in Loop,,,,2025Q3,2025Q4,250 500 1000,200,,,high
-product,Grey Soul,8322532409541,High Grown Espresso (Med-Dark Profile),,,,2025Q3,2025Q4,200 400 1000,200,,,high
-product,Grey Soul,8348879388869,Odisha Fermented Naturals (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high
-product,Third Wave Coffee,6795616092230,Vienna Roast,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high
-product,Third Wave Coffee,6795616256070,El Diablo Blend,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high
-product,Third Wave Coffee,6795616387142,Signature South Indian Filter Blend,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high
-product,Third Wave Coffee,6795647483974,French Roast,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high
-product,Third Wave Coffee,6795651973190,Monsoon Malabar AA,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high
-product,Third Wave Coffee,7164334211142,Speciality Single Origin Bababudangiri Region,,,,2023Q3,2023Q4,250,250 500,,,high
+level,roaster,product_id,product_title,variant_id,variant_title_before,variant_title_after,from_quarter,to_quarter,sizes_before,sizes_after,size_source_before,size_source_after,confidence,crosses_product_split
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439824581,250 GMS / Whole Bean,150 GMS / Whole Bean,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439857349,250 GMS / Pourover,150 GMS / Pourover,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439890117,250 GMS / French Press,150 GMS / French Press,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439922885,250 GMS / Moka Pot,150 GMS / Moka Pot,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439955653,250 GMS / Aeropress,150 GMS / Aeropress,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184439988421,250 GMS / Chemex,150 GMS / Chemex,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440021189,250 GMS / Espresso,150 GMS / Espresso,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440053957,250 GMS / Channi,150 GMS / Channi,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440086725,250 GMS / Cold Brew,150 GMS / Cold Brew,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440119493,250 GMS / South Indian Filter,150 GMS / South Indian Filter,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),42184440152261,250 GMS / Electric Drip/ Siphon,150 GMS / Electric Drip/ Siphon,2023Q3,2024Q3,250.0,150.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499888325,500 GMS / Whole Bean,250 GMS / Whole Bean,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499921093,500 GMS / Pourover,250 GMS / Pourover,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499953861,500 GMS / French Press,250 GMS / French Press,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184499986629,500 GMS / Chemex,250 GMS / Chemex,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500019397,500 GMS / Espresso,250 GMS / Espresso,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500052165,500 GMS / Channi,250 GMS / Channi,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500084933,500 GMS / Cold Brew,250 GMS / Cold Brew,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500117701,500 GMS / Moka Pot,250 GMS / Moka Pot,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500150469,500 GMS / Aeropress,250 GMS / Aeropress,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500183237,500 GMS / Electric Drip Coffee Machine,250 GMS / Electric Drip Coffee Machine,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),42184500216005,500 GMS / South Indian Filter,250 GMS / South Indian Filter,2024Q3,2024Q4,500.0,250.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669043397,250 GMS / Whole Bean,200 GMS / Whole Bean,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669076165,250 GMS / Pourover,200 GMS / Pourover,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669108933,250 GMS / French Press,200 GMS / French Press,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669141701,250 GMS / Chemex,200 GMS / Chemex,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669174469,250 GMS / Espresso,200 GMS / Espresso,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669207237,250 GMS / Channi,200 GMS / Channi,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669240005,250 GMS / Cold Brew,200 GMS / Cold Brew,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669272773,250 GMS / Moka Pot,200 GMS / Moka Pot,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669305541,250 GMS / Aeropress,200 GMS / Aeropress,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669338309,250 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669371077,250 GMS / South Indian Filter,200 GMS / South Indian Filter,2023Q3,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669403845,500 GMS / Whole Bean,400 GMS / Whole Bean,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669436613,500 GMS / Pourover,400 GMS / Pourover,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669469381,500 GMS / French Press,400 GMS / French Press,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669502149,500 GMS / Chemex,400 GMS / Chemex,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669534917,500 GMS / Espresso,400 GMS / Espresso,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669567685,500 GMS / Channi,400 GMS / Channi,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669600453,500 GMS / Cold Brew,400 GMS / Cold Brew,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669633221,500 GMS / Moka Pot,400 GMS / Moka Pot,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669665989,500 GMS / Aeropress,400 GMS / Aeropress,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669698757,500 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),42239669731525,500 GMS / South Indian Filter,400 GMS / South Indian Filter,2023Q3,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796019397,250 GMS / Whole Bean,200 GMS / Whole Bean,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796052165,250 GMS / Pourover,200 GMS / Pourover,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796084933,250 GMS / French Press,200 GMS / French Press,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796117701,250 GMS / Chemex,200 GMS / Chemex,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796150469,250 GMS / Espresso,200 GMS / Espresso,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796183237,250 GMS / Channi,200 GMS / Channi,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796216005,250 GMS / Cold Brew,200 GMS / Cold Brew,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796248773,250 GMS / Moka Pot,200 GMS / Moka Pot,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796281541,250 GMS / Aeropress,200 GMS / Aeropress,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796314309,250 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796347077,250 GMS / South Indian Filter,200 GMS / South Indian Filter,2024Q2,2024Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796379845,500 GMS / Whole Bean,400 GMS / Whole Bean,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796412613,500 GMS / Pourover,400 GMS / Pourover,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796445381,500 GMS / French Press,400 GMS / French Press,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796478149,500 GMS / Chemex,400 GMS / Chemex,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796510917,500 GMS / Espresso,400 GMS / Espresso,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796543685,500 GMS / Channi,400 GMS / Channi,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796576453,500 GMS / Cold Brew,400 GMS / Cold Brew,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796609221,500 GMS / Moka Pot,400 GMS / Moka Pot,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796641989,500 GMS / Aeropress,400 GMS / Aeropress,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796674757,500 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),42239796707525,500 GMS / South Indian Filter,400 GMS / South Indian Filter,2024Q2,2024Q4,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,7451014234309,Ultra Light Nagaland,42241317273797,250 GMS / Whole Bean,200 GMS / Whole Bean,2023Q3,2025Q3,250.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086080197,150 GMS / Whole Bean,200 GMS / Whole Bean,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086112965,150 GMS / Pourover,200 GMS / Pourover,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086145733,150 GMS / French Press,200 GMS / French Press,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086211269,150 GMS / Chemex,200 GMS / Chemex,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086244037,150 GMS / Espresso,200 GMS / Espresso,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086276805,150 GMS / Channi,200 GMS / Channi,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086309573,150 GMS / Cold Brew,200 GMS / Cold Brew,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086342341,150 GMS / Moka Pot,200 GMS / Moka Pot,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086375109,150 GMS / Aeropress,200 GMS / Aeropress,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086407877,150 GMS / Electric Drip Coffee Machine,200 GMS / Electric Drip Coffee Machine,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086440645,150 GMS / South Indian Filter,200 GMS / South Indian Filter,2025Q1,2025Q2,150.0,200.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086473413,250 GMS / Whole Bean,400 GMS / Whole Bean,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086506181,250 GMS / Pourover,400 GMS / Pourover,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086538949,250 GMS / French Press,400 GMS / French Press,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086571717,250 GMS / Chemex,400 GMS / Chemex,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086604485,250 GMS / Espresso,400 GMS / Espresso,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086637253,250 GMS / Channi,400 GMS / Channi,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086670021,250 GMS / Cold Brew,400 GMS / Cold Brew,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086702789,250 GMS / Moka Pot,400 GMS / Moka Pot,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086735557,250 GMS / Aeropress,400 GMS / Aeropress,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086768325,250 GMS / Electric Drip Coffee Machine,400 GMS / Electric Drip Coffee Machine,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,7973367644357,Fruit Naturals (Light Roast),43719086833861,250 GMS / South Indian Filter,400 GMS / South Indian Filter,2025Q1,2025Q2,250.0,400.0,variant_title,variant_title,high,True
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187699397,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187732165,250 GMS / Pourover,200 GMS / Pourover,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187764933,250 GMS / French Press,200 GMS / French Press,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187797701,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187830469,250 GMS / Aeropress,200 GMS / Aeropress,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187896005,250 GMS / Espresso,200 GMS / Espresso,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120187961541,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q1,2025Q3,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188059845,500 GMS / Whole Bean,400 GMS / Whole Bean,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188092613,500 GMS / Pourover,400 GMS / Pourover,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188125381,500 GMS / French Press,400 GMS / French Press,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188158149,500 GMS / Moka Pot,400 GMS / Moka Pot,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188190917,500 GMS / Aeropress,400 GMS / Aeropress,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188256453,500 GMS / Espresso,400 GMS / Espresso,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),44120188321989,500 GMS / Cold Brew,400 GMS / Cold Brew,2025Q1,2025Q3,500.0,400.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465317871813,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465317904581,250 GMS / Pourover,200 GMS / Pourover,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465317937349,250 GMS / French Press,200 GMS / French Press,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465318002885,250 GMS / Espresso,200 GMS / Espresso,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465318068421,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465318101189,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,8228349837509,Strawberry in Loop,44465318133957,250 GMS / Aeropress,200 GMS / Aeropress,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862235845,250 GMS / Whole Bean,200 GMS / Whole Bean,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862268613,250 GMS / Pourover,200 GMS / Pourover,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862301381,250 GMS / French Press,200 GMS / French Press,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862366917,250 GMS / Espresso,200 GMS / Espresso,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862432453,250 GMS / Cold Brew,200 GMS / Cold Brew,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862465221,250 GMS / Moka Pot,200 GMS / Moka Pot,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+variant,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),44642862497989,250 GMS / Aeropress,200 GMS / Aeropress,2025Q3,2025Q4,250.0,200.0,variant_title,variant_title,high,False
+product,Araku,8380902506816,Grand Reserve,,,,2025Q3,2025Q4,250,250 500 1000,,,high,False
+product,Araku,8380902539584,Signature,,,,2025Q3,2025Q4,250,250 500 1000,,,high,False
+product,Araku,8380902572352,Selection,,,,2025Q3,2025Q4,250,250 500 1000,,,high,False
+product,Araku,8380906176832,Micro Climate,,,,2025Q3,2025Q4,250,250 500 1000,,,high,False
+product,Black Baza,2489368838223,Otter,,,,2024Q2,2024Q3,250 500,250,,,high,False
+product,Bloom,6563619406010,Kenny Ji - The Cold Brew Blend,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6563740025018,Ro-Busta Rhymes - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6563766403258,Satchmo - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6563778035898,Vin Van Gogh - Medium Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6563812409530,Venkids Valley Estate (Washed) – Coorg - Medium Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6563822076090,Salawara Estate – Chikmaglur - Dark Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,6903892279482,Papakuchi Coffee (Washed) - Coorg (Light Roast),,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,7096363057338,Pulney Coffee (Washed) - Pulney Hills - Medium Roast,,,,2025Q1,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,7308398985402,Balanoor Plantations - Kents (Washed) - Chikmagalur - Medium Roast,,,,2023Q1,2023Q4,250 500,250 500 1000,,,high,False
+product,Bloom,7385879838906,Meera - Medium Light Roast,,,,2023Q4,2025Q3,250 500 1000,250 1000,,,high,False
+product,Bloom,7437536493754,Greenland Estate (Washed) - Valparai (Tamil Nadu) - Medium Roast,,,,2024Q3,2025Q1,250 500 1000,250,,,high,False
+product,Blue Tokai,6568026243127,Howdia Estate,,,,2024Q2,2026Q3,250 500 1000,250,,,high,False
+product,Blue Tokai,7215158755383,Raxidi Lobo Estate,,,,2025Q1,2025Q4,250,250 500 1000,,,high,False
+product,Grey Soul,7425799291077,Biccode LEL Naturals (Light-Med Roast),,,,2023Q3,2024Q3,250,150 250 500,,,high,False
+product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q2,2024Q3,150 250 500,250 500,,,high,False
+product,Grey Soul,7425820688581,Badra HDT X CATUAI Naturals (Light-Med Profile),,,,2024Q3,2024Q4,250 500,250,,,high,False
+product,Grey Soul,7425831207109,Ell'sworth Black Honey (Light-Med Profile),,,,2024Q2,2024Q3,150 250 500,250 500,,,high,False
+product,Grey Soul,7450794131653,Nagaland Zunheboto Naturals (Light Profile),,,,2023Q3,2024Q4,150 250 500,200 400,,,high,False
+product,Grey Soul,7450817396933,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),,,,2023Q3,2024Q2,150 250 500,250 500,,,high,False
+product,Grey Soul,7450817396933,Nagaland Zunheboto Graded Washed (Med Profile),,,,2024Q2,2024Q4,250 500,200 400,,,high,False
+product,Grey Soul,7451014234309,Ultra Light Nagaland,,,,2023Q3,2025Q3,250 500,200 400,,,high,True
+product,Grey Soul,7451014234309,Ultra Light Nagaland,,,,2025Q3,2025Q4,200 400,200,,,high,False
+product,Grey Soul,7487855853765,Roasters Espresso 2.0 (Med-Dark Profile),,,,2024Q4,2025Q1,250 500 1000,500 1000,,,high,False
+product,Grey Soul,7487855853765,Roasters Espresso 2.0 (Med-Dark Profile),,,,2025Q1,2025Q2,500 1000,250 500 1000,,,high,False
+product,Grey Soul,7487855853765,Roasters Espresso (Med-Dark Roast),,,,2025Q3,2025Q4,250 500 1000,200,,,high,False
+product,Grey Soul,7549447798981,CATAUI NANO LOT (Light-Med Roast),,,,2024Q4,2025Q1,200,200 400,,,high,True
+product,Grey Soul,7549447798981,Attikan Nano LOT (Ultra Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high,False
+product,Grey Soul,7705499173061,Cold Brew Naturals (Med-Dark Profile),,,,2024Q4,2025Q1,250 500 1000,1000,,,high,False
+product,Grey Soul,7705499173061,Single Origin Cold Brew (Med-Dark Profile),,,,2025Q1,2025Q2,1000,200 400 1000,,,high,False
+product,Grey Soul,7705499173061,Single Origin Cold Brew (Med-Dark Roast),,,,2025Q3,2025Q4,200 400 1000,200,,,high,False
+product,Grey Soul,7973367644357,Fruit Naturals (Light Roast),,,,2025Q1,2025Q2,150 250 500,200 400,,,high,True
+product,Grey Soul,7973367644357,Fruit Naturals (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high,False
+product,Grey Soul,8031212044485,The Rose Coffee (72 Hour Fermented Naturals) (Light Roast),,,,2024Q3,2024Q4,200 400,200,,,high,False
+product,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),,,,2025Q1,2025Q3,250 500,200 400,,,high,False
+product,Grey Soul,8111070347461,Odisha Floral Honey (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high,False
+product,Grey Soul,8152190648517,Saccharomyces Anaerobic Naturals (Med Roast),,,,2024Q4,2025Q1,150 250 500,250 500,,,high,False
+product,Grey Soul,8228349837509,Strawberry in Loop,,,,2025Q3,2025Q4,250 500 1000,200,,,high,False
+product,Grey Soul,8322532409541,High Grown Espresso (Med-Dark Profile),,,,2025Q3,2025Q4,200 400 1000,200,,,high,False
+product,Grey Soul,8348879388869,Odisha Fermented Naturals (Light Roast),,,,2025Q3,2025Q4,200 400,200,,,high,False
+product,Third Wave Coffee,6795616092230,Vienna Roast,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high,False
+product,Third Wave Coffee,6795616256070,El Diablo Blend,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high,False
+product,Third Wave Coffee,6795616387142,Signature South Indian Filter Blend,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high,False
+product,Third Wave Coffee,6795647483974,French Roast,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high,False
+product,Third Wave Coffee,6795651973190,Monsoon Malabar AA,,,,2023Q2,2023Q3,250 500 1000,250 500,,,high,False
+product,Third Wave Coffee,7164334211142,Speciality Single Origin Bababudangiri Region,,,,2023Q3,2023Q4,250,250 500,,,high,False

@@ -125,6 +125,39 @@ def all_card_text(v: pd.DataFrame) -> dict[tuple[str, str], str]:
     return out
 
 
+# ---------- title changes within one product ID ----------
+
+TITLE_CHANGE_BELOW = 0.5
+TITLE_CHANGES_OUT = config.DATA_DIR / "review" / "title_changes.csv"
+# Words that say nothing about WHICH coffee it is; ignored when comparing titles.
+_GENERIC = {"coffee", "coffees", "bean", "beans", "roast", "roasted", "profile", "blend",
+            "the", "and", "of", "with", "regular", "a", "an", "by"}
+
+
+def title_words(title: str) -> set[str]:
+    return {w for w in re.sub(r"[^a-z0-9]+", " ", str(title).lower()).split()
+            if w not in _GENERIC}
+
+
+def title_similarity(titles: list[str]) -> float | None:
+    """Lowest word overlap (Jaccard) between consecutive distinct titles of one product ID.
+
+    Distinctive words only, so a rename or reordering scores high
+    ("March Mellow ( Cold Brew Blend )" -> "Cold Brew Blend - Regular (March Mellow)")
+    and a page reused for another coffee scores low ("VIETNAMESE ROBUSTA
+    COFFEE" -> "COLOMBIAN ARABICA COFFEE" = 0). Character similarity misses
+    that case: shared letters and "coffee" push it over 0.5. None if the title
+    never changed.
+    """
+    if len(titles) < 2:
+        return None
+    scores = []
+    for a, b in zip(titles, titles[1:]):
+        wa, wb = title_words(a), title_words(b)
+        scores.append(len(wa & wb) / len(wa | wb) if wa | wb else 1.0)
+    return round(min(scores), 3)
+
+
 # ---------- the table ----------
 
 def build() -> pd.DataFrame:
@@ -134,12 +167,18 @@ def build() -> pd.DataFrame:
     v = pd.read_csv(collect.VARIANTS_OUT, dtype=str)
     desc, cards = live_descriptions(), all_card_text(v)
     rows = []
-    for (roaster, pid), g in v.sort_values("quarter").groupby(["roaster", "product_id"]):
+    # kind="stable" keeps the file's own row order within a quarter. The default
+    # sort isn't stable, so variant_titles came out in a different order on each
+    # rebuild; that changed the LLM prompts and defeated the response cache.
+    for (roaster, pid), g in v.sort_values("quarter", kind="stable").groupby(["roaster", "product_id"]):
         titles = list(dict.fromkeys(g.product_title.dropna()))
         variants = list(dict.fromkeys(t for t in g.variant_title.dropna() if t))
         d = desc.get((roaster, pid), "")
         c = cards.get((roaster, pid), "")
+        sim = title_similarity(titles)
         rows.append({
+            "title_similarity": sim,
+            "title_changed": sim is not None and sim < TITLE_CHANGE_BELOW,
             "roaster": roaster, "tier": g.tier.iloc[0], "product_id": pid,
             "product_title": titles[-1] if titles else "",
             "other_titles": " | ".join(titles[:-1]),
@@ -159,6 +198,12 @@ def build() -> pd.DataFrame:
 def main() -> None:
     df = build()
     df.to_csv(OUT, index=False)
+    changed = df[df.title_changed]
+    TITLE_CHANGES_OUT.parent.mkdir(parents=True, exist_ok=True)
+    changed[["roaster", "product_id", "other_titles", "product_title", "title_similarity",
+             "first_quarter", "last_quarter"]].to_csv(TITLE_CHANGES_OUT, index=False)
+    print(f"  title changed within one ID (possible page reuse): {len(changed)} "
+          f"-> {TITLE_CHANGES_OUT}")
     print(f"Wrote {len(df)} products to {OUT}")
     print(f"  with description: {df.has_description.sum()}, title only: {(~df.has_description).sum()}")
     print(f"  with card text:   {df.has_card_text.sum()}")
