@@ -1,0 +1,2 @@
+old_base,new_base,overlap_months,overlap_from,overlap_to,link_factor,ratio_min,ratio_max,linked_months
+2012,2024,12,2025-01,2025-12,1.8985,1.8937,1.9027,8

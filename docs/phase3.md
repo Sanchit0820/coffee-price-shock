@@ -137,6 +137,21 @@ Applied in `postprocess()` (`src/extract_attributes.py`); idempotent.
 5. **The 3 products that failed validation twice are kept, all "unknown"**
    (`rules_applied` says so).
 
+## Process/lot-word rule (approved 30 Sep 2026, applied before Phase 4)
+
+The title-change check also flags a change when BOTH titles name a process
+(natural, washed, honey incl. red/yellow/black/white honey, anaerobic,
+carbonic, monsooned, fermented, yeast, koji, culture...) or a lot ("Lot #08")
+and it differs, even with high word overlap - it had missed Grey Soul "Graded
+Naturals -> Graded Washed". One test (`is_different_coffee`) drives both the
+flag and the key split. Effect: **11 flagged products** (3 new, all Grey Soul),
+**521 product keys**; the size report marks 64 changes as crossing a split; the
+same 3 of 6 Grey Soul size cuts survive. The 3 new products' attributes were
+re-extracted one per call (no value changed). Matching also now checks for an
+ID break between the last archived quarter and the live snapshot (same < 10%
+carryover rule): only Corridor Seven qualified, and all 16 candidate pairs
+were rejected (its live products are its 2024 coffees under original IDs).
+
 ## Product keys per quarter (`src/product_keys.py`)
 
 `data/clean/product_keys_by_quarter.csv` gives the key for every

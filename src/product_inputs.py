@@ -139,6 +139,58 @@ def title_words(title: str) -> set[str]:
             if w not in _GENERIC}
 
 
+# Process words (normalised): a change between two titles that both name a
+# process means a different coffee, even when most other words are the same
+# ("Graded Naturals" -> "Graded Washed"). Decided 2026-09-30.
+_PROCESS = [
+    (r"\b(red|yellow|black|white|golden)\s+honey\b", lambda m: f"{m.group(1).lower()} honey"),
+    (r"\bsemi[- ]washed\b", lambda m: "semi-washed"),
+    (r"\bnaturals?\b", lambda m: "natural"),
+    (r"\bwashed\b", lambda m: "washed"),
+    (r"\bhoney\b", lambda m: "honey"),
+    (r"\banaerobic\b", lambda m: "anaerobic"),
+    (r"\baerobic\b", lambda m: "aerobic"),
+    (r"\bcarbonic\b", lambda m: "carbonic"),
+    (r"\bmacerat\w*", lambda m: "maceration"),
+    (r"\bmonsoon\w*", lambda m: "monsooned"),
+    (r"\bferment\w*", lambda m: "fermentation"),
+    (r"\byeast\b", lambda m: "yeast"),
+    (r"\bkoji\b", lambda m: "koji"),
+    (r"\bcultur\w*", lambda m: "culture"),
+    (r"\bpulped\b", lambda m: "pulped"),
+    (r"\bwet[- ]hulled\b", lambda m: "wet-hulled"),
+]
+_LOT = re.compile(r"\blot\s*#?\s*([a-z]*\d[\w-]*)|#\s*([a-z]*\d[\w-]*)", re.IGNORECASE)
+
+
+def process_words(title: str) -> set[str]:
+    """Normalised process words in a title. A coloured honey ("red honey") is
+    taken as one term, so "Red Honey" vs "Floral Honey" counts as a change."""
+    text, found = str(title), set()
+    for pattern, name in _PROCESS:
+        for m in re.finditer(pattern, text, re.IGNORECASE):
+            found.add(name(m))
+        text = re.sub(pattern, " ", text, flags=re.IGNORECASE)   # don't count "honey" twice
+    return found
+
+
+def lot_ids(title: str) -> set[str]:
+    return {(a or b).lower() for a, b in _LOT.findall(str(title))}
+
+
+def process_or_lot_changed(a: str, b: str) -> bool:
+    """True if BOTH titles name a process (or a lot) and it differs. One title
+    naming none isn't a change: that is usually just a shorter title."""
+    pa, pb, la, lb = process_words(a), process_words(b), lot_ids(a), lot_ids(b)
+    return bool((pa and pb and pa != pb) or (la and lb and la != lb))
+
+
+def is_different_coffee(a: str, b: str) -> bool:
+    """The test used everywhere a product ID's title changes: low overlap of
+    distinctive words, or a changed process or lot."""
+    return title_similarity([a, b]) < TITLE_CHANGE_BELOW or process_or_lot_changed(a, b)
+
+
 def title_similarity(titles: list[str]) -> float | None:
     """Lowest word overlap (Jaccard) between consecutive distinct titles of one product ID.
 
@@ -178,7 +230,9 @@ def build() -> pd.DataFrame:
         sim = title_similarity(titles)
         rows.append({
             "title_similarity": sim,
-            "title_changed": sim is not None and sim < TITLE_CHANGE_BELOW,
+            "title_changed": any(is_different_coffee(a, b) for a, b in zip(titles, titles[1:])),
+            "process_or_lot_changed": any(process_or_lot_changed(a, b)
+                                          for a, b in zip(titles, titles[1:])),
             "roaster": roaster, "tier": g.tier.iloc[0], "product_id": pid,
             "product_title": titles[-1] if titles else "",
             "other_titles": " | ".join(titles[:-1]),
@@ -201,7 +255,7 @@ def main() -> None:
     changed = df[df.title_changed]
     TITLE_CHANGES_OUT.parent.mkdir(parents=True, exist_ok=True)
     changed[["roaster", "product_id", "other_titles", "product_title", "title_similarity",
-             "first_quarter", "last_quarter"]].to_csv(TITLE_CHANGES_OUT, index=False)
+             "process_or_lot_changed", "first_quarter", "last_quarter"]].to_csv(TITLE_CHANGES_OUT, index=False)
     print(f"  title changed within one ID (possible page reuse): {len(changed)} "
           f"-> {TITLE_CHANGES_OUT}")
     print(f"Wrote {len(df)} products to {OUT}")

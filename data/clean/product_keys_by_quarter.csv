@@ -1395,10 +1395,10 @@ Grey Soul,6705297326277,2023Q1,archive,Gungegiri - SC 40A (Single Origin Anaerob
 Grey Soul,7060411547845,2023Q1,archive,SC 51A (2022 Micro LOT - 1) (Med Roast),grey-soul:7060411547845,1,2023Q1,2023-02-01,False,True
 Grey Soul,7171489235141,2023Q1,archive,Submarine Fermentation (Med-Dark Profile),grey-soul:7171489235141,1,2023Q1,2023-02-01,False,True
 Grey Soul,7171511877829,2023Q1,archive,ELL'SWORTH RED HONEY (Med Profile),grey-soul:7171511877829,1,2023Q1,2023-02-01,False,True
-Grey Soul,7209404006597,2023Q1,archive,Ratnagiri Washed (Med-Dark Profile),grey-soul:7209404006597,1,2023Q1,2023-02-01,False,True
-Grey Soul,7209404006597,2024Q4,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597,1,2023Q1,2023-02-01,False,True
-Grey Soul,7209404006597,2025Q1,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597,1,2023Q1,2023-02-01,False,True
-Grey Soul,7209404006597,2025Q2,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597,1,2023Q1,2023-02-01,False,True
+Grey Soul,7209404006597,2023Q1,archive,Ratnagiri Washed (Med-Dark Profile),grey-soul:7209404006597,1,2023Q1,2023-02-01,True,False
+Grey Soul,7209404006597,2024Q4,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597@2024Q4,2,2024Q4,2024-12-03,True,True
+Grey Soul,7209404006597,2025Q1,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597@2024Q4,2,2024Q4,2024-12-03,True,True
+Grey Soul,7209404006597,2025Q2,archive,Fermented Graded Washed (Med-Dark Profile),grey-soul:7209404006597@2024Q4,2,2024Q4,2024-12-03,True,True
 Grey Soul,7230153720005,2023Q1,archive,Lactic Fermentation Naturals (Light-Med Profile),grey-soul:7230153720005,1,2023Q1,2023-02-01,False,True
 Grey Soul,7269407785157,2023Q1,archive,Honey Anaerobic Ratnagiri Estate (Med-Light Profile),grey-soul:7269407785157,1,2023Q1,2023-02-01,False,True
 Grey Soul,7276743688389,2023Q1,archive,DB Naturals Ratnagiri Estate (Med Profile),grey-soul:7276743688389,1,2023Q1,2023-02-01,False,True
@@ -1427,11 +1427,11 @@ Grey Soul,7425831207109,2024Q4,archive,Ell'sworth Black Honey (Light-Med Profile
 Grey Soul,7450794131653,2023Q3,archive,Nagaland Zunheboto Naturals (Light-Med Profile),grey-soul:7450794131653,1,2023Q3,2023-09-25,False,True
 Grey Soul,7450794131653,2024Q4,archive,Nagaland Zunheboto Naturals (Light Profile),grey-soul:7450794131653,1,2023Q3,2023-09-25,False,True
 Grey Soul,7450794131653,2025Q1,archive,Nagaland Zunheboto Naturals (Light Profile),grey-soul:7450794131653,1,2023Q3,2023-09-25,False,True
-Grey Soul,7450817396933,2023Q3,archive,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,False,True
-Grey Soul,7450817396933,2024Q2,archive,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,False,True
-Grey Soul,7450817396933,2024Q4,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,False,True
-Grey Soul,7450817396933,2025Q1,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,False,True
-Grey Soul,7450817396933,2025Q2,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,False,True
+Grey Soul,7450817396933,2023Q3,archive,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,True,False
+Grey Soul,7450817396933,2024Q2,archive,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),grey-soul:7450817396933,1,2023Q3,2023-09-25,True,False
+Grey Soul,7450817396933,2024Q4,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933@2024Q4,2,2024Q4,2024-12-03,True,True
+Grey Soul,7450817396933,2025Q1,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933@2024Q4,2,2024Q4,2024-12-03,True,True
+Grey Soul,7450817396933,2025Q2,archive,Nagaland Zunheboto Graded Washed (Med Profile),grey-soul:7450817396933@2024Q4,2,2024Q4,2024-12-03,True,True
 Grey Soul,7451014234309,2023Q3,archive,Nagaland Kohima 23 Naturals (Light Roast Profile),grey-soul:7451014234309,1,2023Q3,2023-09-25,True,False
 Grey Soul,7451014234309,2025Q3,archive,Ultra Light Nagaland,grey-soul:7451014234309@2025Q3,2,2025Q3,2025-09-09,True,True
 Grey Soul,7451014234309,2025Q4,archive,Ultra Light Nagaland,grey-soul:7451014234309@2025Q3,2,2025Q3,2025-09-09,True,True
@@ -1504,10 +1504,10 @@ Grey Soul,8031212044485,2025Q1,archive,The Rose Coffee (72 Hour Fermented Natura
 Grey Soul,8031320834245,2024Q3,archive,The Betel Leaf Coffee (72 Hour Fermented Naturals) (Light-Med Roast),grey-soul:8031320834245,1,2024Q3,2024-08-06,False,True
 Grey Soul,8031320834245,2024Q4,archive,The Betel Leaf Coffee (72 Hour Fermented Naturals) (Light-Med Roast),grey-soul:8031320834245,1,2024Q3,2024-08-06,False,True
 Grey Soul,8031320834245,2025Q1,archive,The Betel Leaf Coffee (72 Hour Fermented Naturals) (Light-Med Roast),grey-soul:8031320834245,1,2024Q3,2024-08-06,False,True
-Grey Soul,8111070347461,2024Q4,archive,Odisha Red Honey (Light-Med Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,False,True
-Grey Soul,8111070347461,2025Q1,archive,Odisha Red Honey (Light-Med Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,False,True
-Grey Soul,8111070347461,2025Q3,archive,Odisha Floral Honey (Light Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,False,True
-Grey Soul,8111070347461,2025Q4,archive,Odisha Floral Honey (Light Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,False,True
+Grey Soul,8111070347461,2024Q4,archive,Odisha Red Honey (Light-Med Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,True,False
+Grey Soul,8111070347461,2025Q1,archive,Odisha Red Honey (Light-Med Roast),grey-soul:8111070347461,1,2024Q4,2024-12-03,True,False
+Grey Soul,8111070347461,2025Q3,archive,Odisha Floral Honey (Light Roast),grey-soul:8111070347461@2025Q3,2,2025Q3,2025-09-09,True,True
+Grey Soul,8111070347461,2025Q4,archive,Odisha Floral Honey (Light Roast),grey-soul:8111070347461@2025Q3,2,2025Q3,2025-09-09,True,True
 Grey Soul,8152190648517,2024Q4,archive,Saccharomyces Anaerobic Naturals (Med Roast),grey-soul:8152190648517,1,2024Q4,2024-12-03,False,True
 Grey Soul,8152190648517,2025Q1,archive,Saccharomyces Anaerobic Naturals (Med Roast),grey-soul:8152190648517,1,2024Q4,2024-12-03,False,True
 Grey Soul,8152207360197,2024Q4,archive,Chandragiri Aerobic Naturals (Light Roast),grey-soul:8152207360197,1,2024Q4,2024-12-03,False,True

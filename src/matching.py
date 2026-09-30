@@ -101,7 +101,36 @@ def candidate_pairs(before: pd.DataFrame, after: pd.DataFrame) -> list[dict]:
     return pairs
 
 
+def live_breaks(v: pd.DataFrame, below: float) -> list[dict]:
+    """ID breaks between each roaster's last archived quarter and the live
+    products.json (Phase 2's id_break only compared archived quarters, so a
+    rebuild between the last snapshot and today went unseen - Corridor Seven).
+
+    Same rule: under `below` of the last archived quarter's product IDs are
+    still live. Returns [{roaster, before_quarter, carryover, before, after}].
+    """
+    arch = v[(v.source_type == "archive") & (v.served_outside_quarter != "True")]
+    live = v[v.source_type == "live"]
+    out = []
+    for roaster, g in arch.groupby("roaster"):
+        last_q = max(g.quarter)
+        before_ids = set(g[g.quarter == last_q].product_id)
+        live_ids = set(live[live.roaster == roaster].product_id)
+        if not before_ids or not live_ids:
+            continue
+        carry = len(before_ids & live_ids) / len(before_ids)
+        out.append({"roaster": roaster, "before_quarter": last_q, "carryover": round(carry, 3),
+                    "is_break": carry < below,
+                    "before": g[g.quarter == last_q].drop_duplicates("product_id")
+                               .pipe(lambda d: d[~d.product_id.isin(live_ids)]),
+                    "after": live[live.roaster == roaster].drop_duplicates("product_id")
+                               .pipe(lambda d: d[~d.product_id.isin(before_ids)])})
+    return out
+
+
 def all_candidates() -> pd.DataFrame:
+    from src.flags import ID_BREAK_BELOW
+
     v = pd.read_csv(collect.VARIANTS_OUT, dtype=str)
     rows = v[(v.source_type == "archive") & (v.served_outside_quarter != "True")]
     cov = pd.read_csv(collect.COVERAGE_OUT, dtype=str)
@@ -110,6 +139,16 @@ def all_candidates() -> pd.DataFrame:
         before_q, before, after = break_sides(rows[rows.roaster == roaster], q)
         for p in candidate_pairs(before, after):
             out.append({"roaster": roaster, "break_quarter": q, "before_quarter": before_q, **p})
+    # Archive -> live breaks come AFTER the archive ones, so existing pair_refs
+    # (and the cached prompts built from them) stay unchanged.
+    for b in live_breaks(v, ID_BREAK_BELOW):
+        print(f"  archive->live {b['roaster']:18} {b['before_quarter']} carryover {b['carryover']:.0%}"
+              + ("  <- BREAK" if b["is_break"] else ""))
+        if b["is_break"]:
+            live_q = v[(v.source_type == "live") & (v.roaster == b["roaster"])].quarter.iloc[0]
+            for p in candidate_pairs(b["before"], b["after"]):
+                out.append({"roaster": b["roaster"], "break_quarter": f"{live_q}-live",
+                            "before_quarter": b["before_quarter"], **p})
     df = pd.DataFrame(out)
     df.insert(0, "pair_ref", [f"p{i}" for i in range(1, len(df) + 1)])
     return df

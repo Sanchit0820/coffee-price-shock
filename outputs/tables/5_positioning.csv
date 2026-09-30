@@ -1,0 +1,12 @@
+roaster,tier,pre_price_100g,repricing_pct,to_quarter,source,n_items,partial
+Araku,core,256.0,21.1,2026Q3,index main segment,64,False
+Black Baza,secondary,164.0,52.1,2026Q3,index main segment,225,False
+Bloom,secondary,180.0,27.2,2026Q3,index main segment,255,False
+Blue Tokai,core,188.0,37.2,2026Q3,index main segment,865,False
+Corridor Seven,core,196.0,40.7,2026Q3,index main segment,295,True
+Devans,core,126.0,68.6,2026Q3,index main segment,454,False
+Dope Coffee,secondary,200.0,26.9,2026Q3,index main segment,99,False
+Grey Soul,core,259.6,8.6,2025Q4,index main segment,313,False
+Kapi Kottai,core,192.0,52.2,2026Q3,index main segment,207,False
+Subko,secondary,378.0,,,no price index,44,False
+Third Wave Coffee,core,172.0,39.3,2026Q3,index main segment,199,False

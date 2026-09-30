@@ -1,9 +1,12 @@
-roaster,product_id,other_titles,product_title,title_similarity,first_quarter,last_quarter
-Blue Tokai,1718179725367,Cold Brew Blend Light,Amaltas Blend,0.0,2023Q1,2026Q3
-Devans,6657601274035,PERÙ - Washed Gr.1 Tres Mosqueteros,Mexico Altura Superior Chiapas Adelita,0.0,2023Q1,2023Q3
-Devans,8414029316316,VIETNAMESE ROBUSTA COFFEE,COLOMBIAN ARABICA COFFEE,0.0,2024Q2,2025Q2
-Grey Soul,6661709332677,Biccode Estate Naturals (DRIP BAGS) | All Can Brew (Drip bags - Med Roast) | All Can Brew Drip bags (Med Roast),Coffee Drip bags (Med Roast),0.222,2023Q2,2026Q3
-Grey Soul,7451014234309,Nagaland Kohima 23 Naturals (Light Roast Profile),Ultra Light Nagaland,0.333,2023Q3,2025Q4
-Grey Soul,7549207773381,Kohima Specialty Naturals (Light Roast),Kohima Naturals (Med Roast),0.4,2024Q2,2025Q2
-Grey Soul,7549447798981,Cavery Yeast Carbonic Naturals (Light-Med Roast) | CATAUI NANO LOT (Light-Med Roast),Attikan Nano LOT (Ultra Light Roast),0.222,2024Q2,2025Q4
-Grey Soul,7973367644357,Intenso Yeast Inoculated Naturals (Light-Med),Fruit Naturals (Light Roast),0.286,2024Q3,2025Q4
+roaster,product_id,other_titles,product_title,title_similarity,process_or_lot_changed,first_quarter,last_quarter
+Blue Tokai,1718179725367,Cold Brew Blend Light,Amaltas Blend,0.0,False,2023Q1,2026Q3
+Devans,6657601274035,PERÙ - Washed Gr.1 Tres Mosqueteros,Mexico Altura Superior Chiapas Adelita,0.0,False,2023Q1,2023Q3
+Devans,8414029316316,VIETNAMESE ROBUSTA COFFEE,COLOMBIAN ARABICA COFFEE,0.0,False,2024Q2,2025Q2
+Grey Soul,6661709332677,Biccode Estate Naturals (DRIP BAGS) | All Can Brew (Drip bags - Med Roast) | All Can Brew Drip bags (Med Roast),Coffee Drip bags (Med Roast),0.222,False,2023Q2,2026Q3
+Grey Soul,7209404006597,Ratnagiri Washed (Med-Dark Profile),Fermented Graded Washed (Med-Dark Profile),0.5,True,2023Q1,2025Q2
+Grey Soul,7450817396933,Nagaland Zunheboto GRADED Naturals (Light-Med Profile),Nagaland Zunheboto Graded Washed (Med Profile),0.571,True,2023Q3,2025Q2
+Grey Soul,7451014234309,Nagaland Kohima 23 Naturals (Light Roast Profile),Ultra Light Nagaland,0.333,False,2023Q3,2025Q4
+Grey Soul,7549207773381,Kohima Specialty Naturals (Light Roast),Kohima Naturals (Med Roast),0.4,False,2024Q2,2025Q2
+Grey Soul,7549447798981,Cavery Yeast Carbonic Naturals (Light-Med Roast) | CATAUI NANO LOT (Light-Med Roast),Attikan Nano LOT (Ultra Light Roast),0.222,False,2024Q2,2025Q4
+Grey Soul,7973367644357,Intenso Yeast Inoculated Naturals (Light-Med),Fruit Naturals (Light Roast),0.286,True,2024Q3,2025Q4
+Grey Soul,8111070347461,Odisha Red Honey (Light-Med Roast),Odisha Floral Honey (Light Roast),0.5,True,2024Q4,2025Q4

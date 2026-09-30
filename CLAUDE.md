@@ -65,7 +65,16 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 4 (analysis) in progress.
-Phase 3 closed 2026-09-30.
-Process/lot-word rule for the title-change check: approved, to be
-applied before the analysis.
+Phase 4 (analysis) in progress. Phase 3 closed 2026-09-30.
+Process/lot-word rule for the title-change check: approved and applied
+(`is_different_coffee` in src/product_inputs.py).
+Phase 4 first run 2026-09-30: `python -m src.analysis.run` -> outputs/*.png,
+outputs/tables/*.csv; findings in `docs/phase4.md`. Headline = RUPEE pass-through
+(percent is secondary). Regressions use `src/analysis/ols.py` (statsmodels can't
+load: Windows Application Control blocks a scipy DLL). CPI check: two MOSPI
+exports (base 2012 + base 2024) spliced over their 12-month overlap in
+src/analysis/inflation.py; real rupee pass-through core median 109%. Step-0 LLM work done
+(3 Grey Soul re-extractions; Corridor Seven archive->live matching: no links).
+One like-for-like definition everywhere: the price index change from the pre-shock
+average (charts 1, 3 and 5 agree). Levers are % / percentage points on that
+baseline; only the 3 hand-confirmed Grey Soul cuts count (data/review/confirmed_size_cuts.csv).

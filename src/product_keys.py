@@ -18,18 +18,18 @@ Use this file (not product_id) to follow a coffee over time.
 import pandas as pd
 
 from src import config
-from src.product_inputs import TITLE_CHANGE_BELOW, TITLE_CHANGES_OUT, title_similarity
+from src.product_inputs import TITLE_CHANGES_OUT, is_different_coffee
 
 OUT = config.CLEAN_DIR / "product_keys_by_quarter.csv"
 
 
 def segment_titles(titles: list[str]) -> list[int]:
     """Segment number (1, 2, ...) for each title in time order: a new segment
-    starts when a title shares < TITLE_CHANGE_BELOW of its distinctive words
-    with the current segment's latest title."""
+    starts when is_different_coffee(latest title, this title) - low word
+    overlap, or a changed process / lot."""
     segments, current, last = [], 1, None
     for t in titles:
-        if last is not None and t != last and title_similarity([last, t]) < TITLE_CHANGE_BELOW:
+        if last is not None and t != last and is_different_coffee(last, t):
             current += 1
         segments.append(current)
         last = t

@@ -404,14 +404,51 @@ def rebuild_review() -> None:
     report_accuracy(df)
 
 
+def reextract_new_flags(provider) -> None:
+    """Re-extract products flagged only by the process/lot rule (added after the
+    full run): their extraction text still contained earlier titles, which may
+    describe a different coffee. One product per call; only their rows change."""
+    from src.product_inputs import TITLE_CHANGE_BELOW
+
+    products = load_products()
+    sim = pd.to_numeric(products.title_similarity, errors="coerce")
+    targets = products[(products.title_changed.astype(str).str.lower() == "true")
+                       & (sim >= TITLE_CHANGE_BELOW)]
+    print(f"re-extracting {len(targets)} products one at a time:")
+    print(targets[["roaster", "product_id", "product_title"]].to_string(index=False))
+    fresh = run_batches(provider, targets, batch_size=1, retry_single=False)
+    old = pd.read_csv(ATTRIBUTES_OUT, dtype=str).fillna("")
+    keep_cols = ["roaster", "product_id", "title_changed", "has_description",
+                 "is_coffee_guess_p2", "is_bundle_p2"]
+    fresh = fresh.merge(products[keep_cols].astype(str), on=["roaster", "product_id"])
+    fresh["rules_applied"] = ""
+    fresh["reextracted"] = "True"      # lets the analysis know these rows are fresh
+    key = ["roaster", "product_id"]
+    old = old.set_index(key)
+    fresh = fresh.astype(str).set_index(key)
+    if "reextracted" not in old.columns:
+        old["reextracted"] = ""
+    for col in fresh.columns:          # replace these products' extraction columns
+        if col in old.columns:
+            old.loc[fresh.index, col] = fresh[col]
+    for f in _REAL_NO:                 # their *_model columns must come from the new answer
+        old.loc[fresh.index, f"{f}_model"] = fresh[f]
+        old.loc[fresh.index, f"{f}_evidence_model"] = fresh[f"{f}_evidence"]
+    old.reset_index().to_csv(ATTRIBUTES_OUT, index=False)
+    print("replaced; re-applying post-processing rules:")
+    rebuild_review()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="LLM attribute extraction")
-    parser.add_argument("action", choices=["pilot", "run", "review"])
+    parser.add_argument("action", choices=["pilot", "run", "review", "reextract"])
     args = parser.parse_args()
     if args.action == "review":
         return rebuild_review()
     from src.llm.gemini import GeminiProvider
     provider = GeminiProvider()
+    if args.action == "reextract":
+        return reextract_new_flags(provider)
     pilot(provider) if args.action == "pilot" else run(provider)
 
 
