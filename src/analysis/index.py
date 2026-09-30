@@ -86,3 +86,33 @@ def cost_index(costs: pd.DataFrame) -> pd.DataFrame:
     """Arabica green-bean cost per 100 g roasted, pre-shock average = 100."""
     base = costs[costs.quarter.isin(PRE)].arabica_roasted_inr_100g.mean()
     return costs.assign(cost_index=costs.arabica_roasted_inr_100g / base * 100)
+
+
+def _quarters_between(a: str, b: str) -> int:
+    """Number of quarters from a to b, e.g. 2024Q2 -> 2025Q3 = 5."""
+    return (int(b[:4]) - int(a[:4])) * 4 + int(b[-1]) - int(a[-1])
+
+
+def step_timing(index_df: pd.DataFrame, shock_start: str) -> pd.DataFrame:
+    """When did each roaster make its biggest price move? The largest single link
+    in the main segment from shock_start on, and how many quarters after the cost
+    rise began it happened (a range: earliest to latest). A link can span quarters without enough matched
+    products (link-back), so the step is only dated to within that span:
+    `span_quarters` > 1 says so."""
+    rows = []
+    main = index_df[index_df.main_segment & (index_df.quarter >= shock_start)
+                    & index_df.link_change_pct.notna()]
+    for r, g in main.groupby("roaster"):
+        big = g.loc[g.link_change_pct.idxmax()]
+        rows.append({"roaster": r, "tier": big.tier, "step_quarter": big.quarter,
+                     "linked_from": big.linked_from,
+                     "span_quarters": _quarters_between(big.linked_from, big.quarter),
+                     "step_pct": round(big.link_change_pct, 1),
+                     # The step happened somewhere in (linked_from, step_quarter]:
+                     # earliest = the quarter after linked_from (not before the shock).
+                     "quarters_after_earliest": max(0, _quarters_between(shock_start, big.linked_from) + 1),
+                     "quarters_after_latest": _quarters_between(shock_start, big.quarter),
+                     "index_before": round(index_df[(index_df.roaster == r)
+                                                    & (index_df.quarter == big.linked_from)]["index"].iloc[0], 1),
+                     "index_after": round(big["index"], 1)})
+    return pd.DataFrame(rows)

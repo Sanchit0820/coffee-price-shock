@@ -133,3 +133,60 @@ def test_roast_loss_changes_rupees_but_not_percent():
     b = pass_through(*pt_inputs(1 / 0.80), roast_loss=0.20).query("lag == '0'").iloc[0]
     assert a.percent_pass_through_pct == pytest.approx(b.percent_pass_through_pct)
     assert a.rupee_pass_through_pct != pytest.approx(b.rupee_pass_through_pct)
+
+
+def test_step_timing_dates_the_biggest_link_as_a_range():
+    from src.analysis.index import step_timing
+    idx = pd.DataFrame({"roaster": "R", "tier": "core", "main_segment": True,
+                        "quarter": ["2024Q1", "2024Q3", "2025Q2"],
+                        "linked_from": [None, "2024Q1", "2024Q3"],
+                        "link_change_pct": [None, 5.0, 30.0],
+                        "index": [100.0, 105.0, 136.5]})
+    row = step_timing(idx, "2024Q2").iloc[0]
+    # Biggest link 2024Q3 -> 2025Q2: happened in 2024Q4..2025Q2, 2..4 quarters after 2024Q2.
+    assert (row.step_quarter, row.span_quarters) == ("2025Q2", 3)
+    assert (row.quarters_after_earliest, row.quarters_after_latest) == (2, 4)
+    assert (row.index_before, row.index_after) == (105.0, 136.5)
+
+
+def levers_inputs(tmp_path, monkeypatch):
+    """One roaster, R. Pre-shock (2023Q1): products A and B at Rs 100/100 g.
+    End (2025Q1): A at Rs 120 (same product: +20%), B dropped, C added at Rs 250.
+    Product P1 (key A) had a confirmed 250 -> 200 g cut at the same shelf price
+    (+25% per 100 g). P2's cut is NOT in the confirmed file, so it must be ignored."""
+    from src.analysis import levers
+    pd.DataFrame({"product_id": ["P1"]}).to_csv(tmp_path / "confirmed.csv", index=False)
+    pd.DataFrame({
+        "roaster": "R", "level": "variant", "confidence": "high", "crosses_product_split": "False",
+        "product_id": ["P1", "P2"], "variant_id": ["V1", "V2"],
+        "from_quarter": "2024Q3", "to_quarter": "2024Q4",
+        "sizes_before": "250", "sizes_after": "200",
+    }).to_csv(tmp_path / "size_changes.csv", index=False)
+    monkeypatch.setattr(levers, "CONFIRMED_CUTS", tmp_path / "confirmed.csv")
+    monkeypatch.setattr(levers, "CLEAN", tmp_path)
+    variants = pd.DataFrame({"roaster": "R", "variant_id": ["V1", "V1", "V2", "V2"],
+                             "quarter": ["2024Q3", "2024Q4", "2024Q3", "2024Q4"],
+                             "ppg": [100.0, 125.0, 100.0, 150.0]})
+    it = pd.DataFrame({"roaster": "R", "tier": "core",
+                       "quarter": ["2023Q1", "2023Q1", "2025Q1", "2025Q1"],
+                       "product_key": ["A", "B", "A", "C"], "ppg": [100.0, 100.0, 120.0, 250.0]})
+    cov = pd.DataFrame({"roaster": ["R"], "quarter": ["2023Q1"], "source_type": ["archive"],
+                        "completeness": ["complete"]})
+    idx = pd.DataFrame({"roaster": "R", "quarter": ["2023Q1", "2025Q1"], "index": [100.0, 120.0],
+                        "main_segment": True})
+    return levers.levers(it, variants, cov, idx).iloc[0]
+
+
+def test_levers_split_adds_up_on_the_index_baseline(tmp_path, monkeypatch):
+    row = levers_inputs(tmp_path, monkeypatch)
+    # Total: geometric mean 100 -> sqrt(120 x 250) = 173.2, i.e. +73.2%.
+    assert row.total_pct == pytest.approx(73.2)
+    # Like-for-like is the index change, the same number the other charts use.
+    assert row.like_for_like_pct == pytest.approx(20.0)
+    # Pack: 1 confirmed cut of 2 end products x +25% = 12.5 pp; P2 is ignored.
+    assert row.size_cut_products == 1
+    assert row.size_cut_ppg_change_pct == pytest.approx(25.0)
+    assert row.pack_size_pp == pytest.approx(12.5)
+    # Range & mix is the remainder, so the parts add back to the total.
+    assert row.range_mix_pp == pytest.approx(40.7)
+    assert row.like_for_like_pct + row.pack_size_pp + row.range_mix_pp == pytest.approx(row.total_pct)

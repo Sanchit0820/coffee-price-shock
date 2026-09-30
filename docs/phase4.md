@@ -47,6 +47,10 @@ never a unit-value bridge. Pre-shock average = 100.
   2025Q3, Third Wave +34% in 2026Q2); Devans was the exception, stepping up
   from 2024Q2 onward.
   *Caveat:* quarterly snapshots can't date a step more precisely than a quarter.
+  `1_step_timing.csv` dates each roaster's largest single link as a range
+  (earliest to latest quarter, since a link can span an archive gap): the core
+  median is 5 quarters after 2024Q2 on both bounds; Corridor Seven's biggest
+  step spans 2024Q3 -> 2026Q3 and can't be dated.
 
 ## 2. Pass-through (`2_pass_through.png`, `2_pass_through_headline.csv`)
 
@@ -167,6 +171,8 @@ but at these sizes the difference is small and everything is in one unit.
   - Roasters Espresso (Med-Dark Roast): 250 g Rs 699 -> 200 g Rs 699 (2025Q3 -> 2025Q4)
   - Strawberry in Loop: 250 g Rs 699 -> 200 g Rs 699 (2025Q3 -> 2025Q4), then the
     200 g pack rose to Rs 799 by 2026Q3 - a price rise on top of the shrink.
+  All three were later repriced upward as well (`3_size_cuts.csv`): Nagaland
+  200 g Rs 699 and 400 g Rs 1,373 by 2025Q1; Roasters Espresso 200 g Rs 799 by 2026Q3.
   Weighted by the share of Grey Soul's 2025Q4 line-up affected (3 of 11
   products x +25%), pack-size cuts account for about 7 points of its
   line-up-wide change.

@@ -9,9 +9,9 @@ lxml>=5.0
 
 # Data and analysis
 pandas>=2.2
+numpy>=2.0      # regressions use a small numpy OLS (src/analysis/ols.py), not statsmodels
 pyarrow>=16.0
-openpyxl>=3.1   # read the World Bank Pink Sheet (.xlsx)
-statsmodels>=0.14
+openpyxl>=3.1   # read the World Bank Pink Sheet and the MOSPI CPI exports (.xlsx)
 matplotlib>=3.9
 
 # LLM layer: validation plus the Gemini SDK (only imported when Gemini is used)

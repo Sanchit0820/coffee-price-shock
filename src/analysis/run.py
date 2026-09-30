@@ -28,6 +28,7 @@ def main() -> None:
     cidx = index.cost_index(costs)
     idx.to_csv(data.TABLES / "1_price_index.csv", index=False)
     cidx.to_csv(data.TABLES / "1_cost_index.csv", index=False)
+    index.step_timing(idx, data.SHOCK_START).to_csv(data.TABLES / "1_step_timing.csv", index=False)
     charts.index_chart(idx, cidx, [r for r in core if r in index_roasters], quarters, partial,
                        OUT / "1_price_index.png")
 
@@ -53,6 +54,7 @@ def main() -> None:
     cov = pd.read_csv(data.CLEAN / "coverage_report.csv", dtype=str)
     lev = levers.levers(it, v, cov, idx)
     lev.to_csv(data.TABLES / "3_levers.csv", index=False)
+    levers.cut_table(v).to_csv(data.TABLES / "3_size_cuts.csv", index=False)
     charts.levers_chart(lev, OUT / "3_levers.png")
 
     # 4. Hedonic: core (headline) and all (robustness)

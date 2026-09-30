@@ -1,0 +1,5 @@
+roaster,product_title,from_quarter,to_quarter,grams_before,grams_after,n_variants,price_before,price_after,ppg_change_pct,latest_quarter,price_latest
+Grey Soul,Nagaland Zunheboto Naturals (Light Profile),2023Q3,2024Q4,250.0,200.0,11,649.0,649.0,25.0,2025Q1,699.0
+Grey Soul,Nagaland Zunheboto Naturals (Light Profile),2023Q3,2024Q4,500.0,400.0,11,1250.0,1250.0,25.0,2025Q1,1373.0
+Grey Soul,Roasters Espresso (Med-Dark Roast),2025Q3,2025Q4,250.0,200.0,7,699.0,699.0,25.0,2026Q3,799.0
+Grey Soul,Strawberry in Loop,2025Q3,2025Q4,250.0,200.0,7,699.0,699.0,25.0,2026Q3,799.0

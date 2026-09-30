@@ -29,6 +29,7 @@ from src.product_inputs import OUT as INPUTS
 PROMPT_VERSION = "attrs-v2"
 PILOT_DIR = config.CLEAN_DIR / "pilot"
 ATTRIBUTES_OUT = config.CLEAN_DIR / "product_attributes.csv"
+ACCURACY_OUT = config.OUTPUTS_DIR / "tables" / "0_label_accuracy.csv"
 PILOT_SIZE = 20
 Confidence = Literal["high", "medium", "low"]
 
@@ -368,6 +369,21 @@ def report_accuracy(df: pd.DataFrame) -> None:
         informative = scores[~scores.field.isin(["decaf", "flavoured_infused"])]
         print(f"mean accuracy, 8 informative fields: {informative.accuracy.mean():.3f} "
               f"(all 10: {scores.accuracy.mean():.3f})")
+    write_accuracy_table(field_scores(raw_output(df), held))
+
+
+def write_accuracy_table(scores: pd.DataFrame) -> None:
+    """Held-out (labels 21-100) accuracy per field on the raw model output, plus the
+    headline row: the mean of the 8 informative fields (decaf and flavoured_infused
+    are almost always "unknown" in the labels, so they say little)."""
+    informative = scores[~scores.field.isin(["decaf", "flavoured_infused"])]
+    head = pd.DataFrame([{"field": "MEAN of 8 informative fields (headline)",
+                          "accuracy": informative.accuracy.mean()}])
+    out = pd.concat([scores, head], ignore_index=True)
+    out[["n", "gold_known"]] = out[["n", "gold_known"]].astype("Int64")   # 80, not 80.0
+    config.OUTPUTS_DIR.joinpath("tables").mkdir(parents=True, exist_ok=True)
+    out.round(4).to_csv(ACCURACY_OUT, index=False)
+    print(f"accuracy table -> {ACCURACY_OUT}")
 
 
 def run(provider) -> None:

@@ -61,6 +61,35 @@ def size_cuts(roaster: str, variants: pd.DataFrame, end: str | None = None) -> p
     return c.dropna(subset=["ppg_change_log"])
 
 
+def cut_table(variants: pd.DataFrame) -> pd.DataFrame:
+    """One row per confirmed size cut, with shelf prices before, after and in the
+    latest quarter the variant appears (so a later price rise shows up too)."""
+    out = []
+    for r in sorted(set(variants.roaster)):
+        cuts = size_cuts(r, variants)
+        if cuts.empty:
+            continue
+        v = variants[variants.roaster == r].drop_duplicates(["variant_id", "quarter"])
+        price = v.set_index(["variant_id", "quarter"]).price_inr
+        for c in cuts.itertuples():
+            last = v[v.variant_id == c.variant_id].quarter.max()
+            out.append({"roaster": r, "product_title": c.product_title, "variant_id": c.variant_id,
+                        "from_quarter": c.from_quarter, "to_quarter": c.to_quarter,
+                        "grams_before": float(c.sizes_before), "grams_after": float(c.sizes_after),
+                        "price_before": price[(c.variant_id, c.from_quarter)],
+                        "price_after": price[(c.variant_id, c.to_quarter)],
+                        "ppg_change_pct": round((np.exp(c.ppg_change_log) - 1) * 100, 1),
+                        "latest_quarter": last, "price_latest": price[(c.variant_id, last)]})
+    if not out:
+        return pd.DataFrame(out)
+    # Each grind option is its own variant with the same price: one row per product x size.
+    keys = ["roaster", "product_title", "from_quarter", "to_quarter", "grams_before", "grams_after"]
+    return (pd.DataFrame(out).groupby(keys, as_index=False)
+            .agg(n_variants=("variant_id", "nunique"), price_before=("price_before", "median"),
+                 price_after=("price_after", "median"), ppg_change_pct=("ppg_change_pct", "median"),
+                 latest_quarter=("latest_quarter", "max"), price_latest=("price_latest", "median")))
+
+
 def levers(items: pd.DataFrame, variants: pd.DataFrame, coverage: pd.DataFrame,
            index_df: pd.DataFrame) -> pd.DataFrame:
     rows = []
