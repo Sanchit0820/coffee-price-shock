@@ -65,6 +65,7 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 3 (LLM attribute extraction and product matching) closed 2026-09-30.
-Next: Phase 4 (analysis) not started. Open decision: add a process/lot-word
-rule to the title-change check (it missed Grey Soul "Graded Naturals -> Graded Washed").
+Phase 4 (analysis) in progress.
+Phase 3 closed 2026-09-30.
+Process/lot-word rule for the title-change check: approved, to be
+applied before the analysis.
