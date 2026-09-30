@@ -107,12 +107,20 @@ def test_missing_key_leaves_everything_pending():
 
 def test_only_unseen_or_pending_products_are_sent():
     rows = month_rows("2026-10", "A", [("1", "Old", 250, 500), ("2", "New", 250, 500)])
-    inputs = attributes.new_inputs(rows, {}, known={("A", "1")}, month="2026-10")
+    inputs = attributes.new_inputs(rows, known={("A", "1")}, month="2026-10")
     assert list(inputs.product_id) == ["2"]
     inputs = pd.concat([inputs, attributes.new_inputs(month_rows("2026-10", "A", [("3", "X", 250, 1)]),
-                                                      {}, set(), "2026-10")])
+                                                      set(), "2026-10")])
     attrs = pd.DataFrame({"roaster": ["A", "A"], "product_id": ["2", "3"], "status": ["ok", "pending"]})
     assert list(attributes.to_do(inputs, attrs).product_id) == ["3"]   # pending is retried
+
+
+def test_description_is_used_but_never_stored():
+    rows = month_rows("2026-10", "A", [("2", "New", 250, 500)])
+    inputs = attributes.new_inputs(rows, known=set(), month="2026-10")
+    assert "description" not in inputs and "card_text" not in inputs   # what gets committed
+    todo = attributes.with_description(inputs, {("A", "2"): "Washed arabica from Coorg."})
+    assert todo.description.iloc[0] == "Washed arabica from Coorg."    # what the model sees
 
 
 # ---------- analysis ----------

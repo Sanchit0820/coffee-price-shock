@@ -35,6 +35,7 @@ from pydantic import BaseModel, Field
 from src import collect, config
 from src.llm.client import extract_items
 from src.product_inputs import OUT as INPUTS
+from src.product_inputs import with_text
 
 MATCHES_OUT = config.CLEAN_DIR / "product_matches.csv"
 CANDIDATES_OUT = config.CLEAN_DIR / "match_candidates.csv"
@@ -340,13 +341,14 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="count candidates and LLM calls only")
     args = parser.parse_args()
     pairs = all_candidates()
-    info = pd.read_csv(INPUTS, dtype={"product_id": str}).set_index(["roaster", "product_id"])
     n_llm = (pairs.method == "llm").sum()
     print(f"candidate pairs: {len(pairs)} ({(pairs.method == 'exact_title').sum()} exact-title, "
           f"{n_llm} for the LLM = {math.ceil(n_llm / BATCH_SIZE)} batched calls)")
     print(pairs.groupby(["roaster", "break_quarter", "method"]).size().to_string())
     if args.dry_run:
         return
+    # The prompts use the shops' card text and descriptions, kept in data/local/ (not in the repo).
+    info = with_text(pd.read_csv(INPUTS, dtype={"product_id": str})).set_index(["roaster", "product_id"])
     from src.llm.gemini import GeminiProvider   # only needed for a real run
     provider = GeminiProvider()
     decisions = decide(provider, pairs, info)

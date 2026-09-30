@@ -2,7 +2,8 @@
 labeller) may use. No network and no LLM calls: everything comes from Phase 2
 outputs and the raw-page cache.
 
-    python -m src.product_inputs  ->  data/clean/product_inputs.csv
+    python -m src.product_inputs  ->  data/clean/product_inputs.csv (committed, no shop text)
+                                  +   data/local/product_text.csv (git-ignored: card_text, description)
 
 A "product" is (roaster, product_id). Text fields:
   product_title   latest title seen; other_titles lists earlier variants of it
@@ -21,8 +22,10 @@ from bs4 import BeautifulSoup
 
 from src import collect, config, http_client, wayback
 
-OUT = config.CLEAN_DIR / "product_inputs.csv"
-CAP = {"variant_titles": 600, "card_text": 300, "description": 1500}
+OUT = config.CLEAN_DIR / "product_inputs.csv"          # committed: no shop text
+TEXT_OUT = config.DATA_DIR / "local" / "product_text.csv"   # git-ignored: card_text, description
+SHOP_TEXT = ["card_text", "description"]
+CAP ={"variant_titles": 600, "card_text": 300, "description": 1500}
 
 
 def clean_text(html_or_text: str) -> str:
@@ -249,9 +252,30 @@ def build() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def save(df: pd.DataFrame) -> None:
+    """The committed table without the shops' own text; the text goes to data/local/
+    (git-ignored). Descriptions and card text are the roasters' copy, so they are
+    used for the LLM steps but never redistributed."""
+    df.drop(columns=SHOP_TEXT).to_csv(OUT, index=False)
+    TEXT_OUT.parent.mkdir(parents=True, exist_ok=True)
+    df[["roaster", "product_id", *SHOP_TEXT]].to_csv(TEXT_OUT, index=False)
+
+
+def with_text(df: pd.DataFrame) -> pd.DataFrame:
+    """Add card_text and description back from data/local/product_text.csv."""
+    if not TEXT_OUT.exists():
+        raise SystemExit(
+            f"{TEXT_OUT} is missing. Product descriptions and card text aren't in the repo "
+            "(they're the shops' own text, not redistributed). Re-create them with a fresh "
+            "scrape: python -m src.collect stage1, then python -m src.product_inputs")
+    text = pd.read_csv(TEXT_OUT, dtype={"product_id": str}).fillna("")
+    return (df.drop(columns=SHOP_TEXT, errors="ignore")
+            .merge(text, on=["roaster", "product_id"], how="left").fillna({c: "" for c in SHOP_TEXT}))
+
+
 def main() -> None:
     df = build()
-    df.to_csv(OUT, index=False)
+    save(df)
     changed = df[df.title_changed]
     TITLE_CHANGES_OUT.parent.mkdir(parents=True, exist_ok=True)
     changed[["roaster", "product_id", "other_titles", "product_title", "title_similarity",

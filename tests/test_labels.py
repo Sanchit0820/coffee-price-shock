@@ -31,12 +31,20 @@ def test_sample_roaster_takes_ambiguous_first():
 
 # ---------- Excel round trip ----------
 
-def small_csv(tmp_path):
-    """A 2-product labels CSV with note lines, like the real one."""
+def small_csv(tmp_path, monkeypatch):
+    """A 2-product labels CSV with note lines, like the real one (no shop text),
+    plus the local shop-text file the workbook adds text from."""
+    from src import product_inputs
+    mp = monkeypatch
+    text = tmp_path / "product_text.csv"
+    pd.DataFrame({"roaster": ["Kapi Kottai", "Subko"], "product_id": ["7311867969698", "43461420023962"],
+                  "card_text": ["", ""], "description": ["Washed arabica from Chikmagalur", ""]}
+                 ).to_csv(text, index=False)
+    mp.setattr(product_inputs, "TEXT_OUT", text)
     cols = ["label_id"] + labels.TEXT_COLUMNS + list(labels.FIELDS) + ["labeller_notes"]
-    rows = [["1", "Kapi Kottai", "7311867969698", "Nātakurinji", "", "Coffee", "250 g / Whole Beans",
-             "", "Washed arabica from Chikmagalur"] + [""] * 11,
-            ["2", "Subko", "43461420023962", "Lot #SH3", "", "", "Whole Bean", "", ""] + [""] * 11]
+    rows = [["1", "Kapi Kottai", "7311867969698", "Nātakurinji", "", "Coffee", "250 g / Whole Beans"]
+            + [""] * 11,
+            ["2", "Subko", "43461420023962", "Lot #SH3", "", "", "Whole Bean"] + [""] * 11]
     path = tmp_path / "hand_labels.csv"
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         f.write("# note one\n# note two\n")
@@ -63,9 +71,21 @@ def fill(xlsx, values_by_row, product_id_override=None):
     wb.save(xlsx)
 
 
-def test_xlsx_keeps_product_id_as_text_and_adds_dropdowns(tmp_path):
+def test_workbook_shows_shop_text_but_csv_never_holds_it(tmp_path, monkeypatch):
     from openpyxl import load_workbook
-    csv, xlsx = small_csv(tmp_path), tmp_path / "hand_labels.xlsx"
+    csv, xlsx = small_csv(tmp_path, monkeypatch), tmp_path / "hand_labels.xlsx"
+    labels.create_xlsx(csv, xlsx)
+    header = [c.value for c in load_workbook(xlsx)["Labels"][1]]
+    assert header.index("description") < header.index("is_coffee")   # text sits before the labels
+    fill(xlsx, [GOOD, GOOD])
+    assert labels.import_xlsx(csv, xlsx) == []
+    written = labels.read_labels(csv)
+    assert "description" not in written and "card_text" not in written
+
+
+def test_xlsx_keeps_product_id_as_text_and_adds_dropdowns(tmp_path, monkeypatch):
+    from openpyxl import load_workbook
+    csv, xlsx = small_csv(tmp_path, monkeypatch), tmp_path / "hand_labels.xlsx"
     before = csv.read_bytes()
     labels.create_xlsx(csv, xlsx)
     assert csv.read_bytes() == before                          # CSV untouched
@@ -84,8 +104,8 @@ def test_xlsx_keeps_product_id_as_text_and_adds_dropdowns(tmp_path):
     assert all(dv.showErrorMessage for dv in dvs)              # invalid typing is rejected
 
 
-def test_import_clean_workbook_writes_csv_and_keeps_notes(tmp_path):
-    csv, xlsx = small_csv(tmp_path), tmp_path / "hand_labels.xlsx"
+def test_import_clean_workbook_writes_csv_and_keeps_notes(tmp_path, monkeypatch):
+    csv, xlsx = small_csv(tmp_path, monkeypatch), tmp_path / "hand_labels.xlsx"
     labels.create_xlsx(csv, xlsx)
     fill(xlsx, [GOOD, {**GOOD, "species": "Other", "region": "unknown"}])   # capital O is fine
     assert labels.import_xlsx(csv, xlsx) == []
@@ -97,8 +117,8 @@ def test_import_clean_workbook_writes_csv_and_keeps_notes(tmp_path):
     assert (tmp_path / "hand_labels.csv.bak").exists()
 
 
-def test_import_reports_problems_and_leaves_csv_alone(tmp_path):
-    csv, xlsx = small_csv(tmp_path), tmp_path / "hand_labels.xlsx"
+def test_import_reports_problems_and_leaves_csv_alone(tmp_path, monkeypatch):
+    csv, xlsx = small_csv(tmp_path, monkeypatch), tmp_path / "hand_labels.xlsx"
     labels.create_xlsx(csv, xlsx)
     before = csv.read_bytes()
     # Row 1: product ID corrupted into a number, as Excel would; row 2: a bad value and a blank.
@@ -120,9 +140,9 @@ def test_india_rule_fills_unknown_only_and_reports_conflicts():
     assert len(conflicts) == 1 and "Brazil" in conflicts[0]
 
 
-def test_create_xlsx_never_overwrites(tmp_path):
+def test_create_xlsx_never_overwrites(tmp_path, monkeypatch):
     import pytest
-    csv, xlsx = small_csv(tmp_path), tmp_path / "hand_labels.xlsx"
+    csv, xlsx = small_csv(tmp_path, monkeypatch), tmp_path / "hand_labels.xlsx"
     labels.create_xlsx(csv, xlsx)
     with pytest.raises(SystemExit):
         labels.create_xlsx(csv, xlsx)

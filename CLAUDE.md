@@ -44,10 +44,14 @@ data/raw, data/clean, src/, notebooks/, outputs/
   (World Bank) and `DEXINUS_<date>.csv` (FRED) -> `data/clean/input_costs_quarterly.csv`
   (₹ green-bean cost per 100 g roasted; roast loss 18% assumed, `--roast-loss`).
   New downloads go in `data/external/` with the download date in the filename.
-- Hand labels (`src/labels.py`): Sanchit labels in `data/labels/hand_labels.xlsx`
-  (dropdowns, product_id as text); `python -m src.labels import` validates it and writes
-  `hand_labels.csv`. Never open the CSV in Excel (it corrupts product IDs). Labelling is
+- Hand labels (`src/labels.py`): Sanchit labels in `data/local/hand_labels_with_text.xlsx`
+  (git-ignored; dropdowns, product_id as text); `python -m src.labels import` validates it and
+  writes `hand_labels.csv`. Never open the CSV in Excel (it corrupts product IDs). Labelling is
   blind: don't show attribute output until labels are imported.
+- Shop text is never committed: product descriptions and listing-card text live only in
+  git-ignored `data/local/` (`product_inputs.with_text()` adds them back for LLM steps);
+  `tests/test_no_shop_text.py` enforces it. History was rewritten 2026-09-30 to remove it
+  (backup bundle in `..\coffee-price-shock-backup-2026-09-30\`).
 - Phase 3 (`docs/phase3.md`): `src/product_inputs.py`, `src/extract_attributes.py`
   (prompt attrs-v2, batch 5), `src/evaluate_labels.py`, `src/matching.py` (match-v1).
   Accuracy is reported on held-out labels 21-100 only (1-20 shaped the prompt).

@@ -1,8 +1,11 @@
 """LLM attributes for products the tracker hasn't seen before.
 
-    data/clean/tracker_inputs.csv      the model's input text for each new product
-                                       (stored when first seen, so a retry next
-                                       month doesn't need the raw page)
+    data/clean/tracker_inputs.csv      each new product's titles and variants, from
+                                       when it was first seen. NOT its description:
+                                       that is the shop's own text, so it is read from
+                                       this month's cached products.json (the runner's
+                                       temporary space) and never committed. A product
+                                       still pending next month gets next month's text.
     data/clean/tracker_attributes.csv  one row per new product: attributes, or
                                        status "pending"
     data/review/tracker_review.csv     products needing a person
@@ -48,9 +51,9 @@ def _keys(df: pd.DataFrame) -> set:
     return set(zip(df.roaster, df.product_id)) if len(df) else set()
 
 
-def new_inputs(month_rows: pd.DataFrame, desc: dict, known: set, month: str) -> pd.DataFrame:
-    """Model inputs for products in this month's rows that aren't in `known`.
-    desc: (roaster, product_id) -> description text."""
+def new_inputs(month_rows: pd.DataFrame, known: set, month: str) -> pd.DataFrame:
+    """Committed input rows (no shop text) for products in this month's rows that
+    aren't in `known`."""
     rows = []
     for (roaster, pid), g in month_rows.groupby(["roaster", "product_id"], sort=True):
         if (roaster, pid) in known:
@@ -60,11 +63,16 @@ def new_inputs(month_rows: pd.DataFrame, desc: dict, known: set, month: str) -> 
                      "product_title": g.product_title.iloc[-1], "other_titles": "",
                      "product_type": g.product_type.iloc[-1],
                      "variant_titles": cap(" | ".join(variants), CAP["variant_titles"]),
-                     "card_text": "", "description": cap(desc.get((roaster, pid), ""), CAP["description"]),
                      "title_changed": False,
                      "is_coffee_guess_p2": g.is_coffee_guess.mode().iloc[0],
                      "is_bundle_p2": (g.is_bundle == "True").any()})
     return pd.DataFrame(rows)
+
+
+def with_description(todo: pd.DataFrame, desc: dict) -> pd.DataFrame:
+    """Add this month's description (in memory only). desc: (roaster, product_id) -> text."""
+    return todo.assign(card_text="", description=[
+        cap(desc.get(k, ""), CAP["description"]) for k in zip(todo.roaster, todo.product_id)])
 
 
 def to_do(inputs: pd.DataFrame, attrs: pd.DataFrame) -> pd.DataFrame:
@@ -151,9 +159,12 @@ def update(month: str, month_rows: pd.DataFrame, desc: dict, make_provider,
     """New inputs, (re)labelled attributes and the review list, as tables to write."""
     inputs, attrs = _read(INPUTS), _read(ATTRIBUTES)
     known = _keys(_read(PHASE3)) | _keys(inputs)
-    inputs = pd.concat([inputs, new_inputs(month_rows, desc, known, month)], ignore_index=True)
+    inputs = pd.concat([inputs, new_inputs(month_rows, known, month)], ignore_index=True)
+    # Older files may still carry text columns: never write them back.
+    inputs = inputs.drop(columns=["card_text", "description"], errors="ignore")
     todo = to_do(inputs, attrs)
     if len(todo):
+        todo = with_description(todo, desc)
         raw, todo_full = extract(todo, make_provider, max_calls)
         fresh = finish(raw, todo_full, month)
         keep = attrs[[k not in _keys(fresh) for k in zip(attrs.roaster, attrs.product_id)]] \

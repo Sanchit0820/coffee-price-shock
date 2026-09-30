@@ -1,10 +1,15 @@
 """Hand-label sample for validating the LLM attribute extraction.
 
     python -m src.labels create   ->  data/labels/hand_labels.csv (never overwrites)
-    python -m src.labels xlsx     ->  data/labels/hand_labels.xlsx to label in Excel
+    python -m src.labels xlsx     ->  data/local/hand_labels_with_text.xlsx to label in Excel
                                       (built from the CSV; never overwrites)
     python -m src.labels import   ->  checks the finished xlsx and writes its labels
                                       into hand_labels.csv (only if there are no problems)
+
+The shops' card text and descriptions are shown to the labeller but never
+committed: the CSV holds IDs, titles and labels; the workbook, which adds the
+text from data/local/product_text.csv, lives in git-ignored data/local/.
+(data/labels/hand_labels.xlsx is the finished workbook with that text removed.)
 
 100 products, stratified: at least MIN_PER_ROASTER from every roaster, the rest
 in proportion to roaster size. Within a roaster, Phase 2's ambiguous products
@@ -22,6 +27,7 @@ import pandas as pd
 
 from src import config
 from src.product_inputs import OUT as INPUTS
+from src.product_inputs import SHOP_TEXT, with_text
 
 LABELS_DIR = config.DATA_DIR / "labels"
 LABELS = LABELS_DIR / "hand_labels.csv"
@@ -29,8 +35,10 @@ SAMPLE_SIZE = 100
 MIN_PER_ROASTER = 5
 SEED = 42
 
+# Product columns in the committed CSV. The shops' own text (card_text,
+# description) is added only in the local workbook: see create_xlsx.
 TEXT_COLUMNS = ["roaster", "product_id", "product_title", "other_titles", "product_type",
-                "variant_titles", "card_text", "description"]
+                "variant_titles"]
 # The fields to label, with the allowed values (same as the extraction schema).
 FIELDS = {
     "is_coffee": "yes / no / unknown",
@@ -59,7 +67,7 @@ ALLOWED: dict[str, list[str] | None] = {
     "flavoured_infused": ["yes", "no", "unknown"],
 }
 assert list(ALLOWED) == list(FIELDS)
-XLSX = LABELS_DIR / "hand_labels.xlsx"
+XLSX = config.DATA_DIR / "local" / "hand_labels_with_text.xlsx"   # git-ignored: has shop text
 NOTE = [
     "# LABEL ONLY FROM THE TEXT PROVIDED IN THIS ROW. Use \"unknown\" when the text "
     "doesn't say. Don't look anything up or use outside knowledge.",
@@ -177,6 +185,11 @@ def create_xlsx(csv_path=None, xlsx_path=None) -> None:
     if xlsx_path.exists():
         raise SystemExit(f"{xlsx_path} already exists; not overwriting your labels.")
     df = read_labels(csv_path)
+    # The labeller sees the shops' text too, placed just before the label columns.
+    df = with_text(df)
+    cols = [c for c in df.columns if c not in SHOP_TEXT]
+    at = cols.index(next(iter(FIELDS)))
+    df = df[cols[:at] + SHOP_TEXT + cols[at:]]
     wb = Workbook()
 
     # Instructions sheet.

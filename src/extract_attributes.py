@@ -2,6 +2,10 @@
 
     python -m src.extract_attributes pilot   # 20 hand-labelled products, batch 5 vs batch 20
     python -m src.extract_attributes run     # all products, batch 5 -> product_attributes.csv
+    python -m src.extract_attributes accuracy  # held-out accuracy table only (no shop text needed)
+
+pilot, run, review and reextract need the shops' text in data/local/ (not in
+the repo): see src/product_inputs.with_text.
 
 Each field has a value, a confidence and the evidence snippet it came from.
 Validation (pydantic):
@@ -22,6 +26,7 @@ from src import config
 from src.labels import ALLOWED, FIELDS, read_labels
 from src.llm.client import extract_items
 from src.product_inputs import OUT as INPUTS
+from src.product_inputs import with_text
 
 # attrs-v1: pilot. attrs-v2 (approved after the pilot on labels 1-20):
 #   cask/barrel-aged or infused -> flavoured_infused yes; the word "blend" alone
@@ -158,7 +163,8 @@ def batch_prompt(batch: pd.DataFrame) -> str:
 # ---------- running ----------
 
 def load_products() -> pd.DataFrame:
-    p = pd.read_csv(INPUTS, dtype={"product_id": str}).fillna("")
+    """Model inputs with the shops' text added back from data/local/ (not in the repo)."""
+    p = with_text(pd.read_csv(INPUTS, dtype={"product_id": str}).fillna(""))
     p["ref"] = [f"r{i}" for i in range(len(p))]
     p["text"] = [product_text(r) for _, r in p.iterrows()]
     return p
@@ -457,8 +463,11 @@ def reextract_new_flags(provider) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="LLM attribute extraction")
-    parser.add_argument("action", choices=["pilot", "run", "review", "reextract"])
+    parser.add_argument("action", choices=["pilot", "run", "review", "reextract", "accuracy"])
     args = parser.parse_args()
+    if args.action == "accuracy":
+        # Scores the saved attributes against the hand labels: needs no shop text.
+        return report_accuracy(pd.read_csv(ATTRIBUTES_OUT, dtype=str).fillna(""))
     if args.action == "review":
         return rebuild_review()
     from src.llm.gemini import GeminiProvider

@@ -15,6 +15,7 @@ python -m src.labels xlsx | import | india-rule   # hand labels (see below)
 python -m src.extract_attributes pilot     # batch 5 vs batch 20 on labels 1-20
 python -m src.extract_attributes run       # all products -> product_attributes.csv
 python -m src.extract_attributes review    # rebuild review file + accuracy, no LLM calls
+python -m src.extract_attributes accuracy  # accuracy table only (works from the repo alone)
 python -m src.matching [--dry-run]         # links across ID breaks -> product_matches.csv
 python -m src.product_keys                 # per-quarter keys, split at page reuse
 python -m src.size_report                  # re-run: marks changes crossing a split
@@ -35,6 +36,11 @@ is deterministic (stable sort), which the cache relies on.
 - Every output row records `model` and `prompt_version`.
 
 ## Inputs (`data/clean/product_inputs.csv`)
+
+*Since Phase 6 cleanup:* the card text and descriptions are no longer in the
+repo (the shops' own copy, not redistributed); they live in git-ignored
+`data/local/product_text.csv`. Every step except `accuracy` in the commands
+above needs them, i.e. a fresh scrape. See README "Reproduce".
 
 536 products (roaster, product_id). 202 have a live description, 334 are title
 only; 433 have listing-card text; 517 have at least one of the two.

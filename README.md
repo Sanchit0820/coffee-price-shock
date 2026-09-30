@@ -209,8 +209,20 @@ pytest
 
 ```powershell
 python -m src.analysis.run                 # all tables in outputs/tables/ and charts 1-5
-python -m src.extract_attributes review    # accuracy table (0_label_accuracy.csv); no LLM calls
+python -m src.extract_attributes accuracy  # accuracy table (0_label_accuracy.csv); no LLM calls
 ```
+
+**Product descriptions aren't redistributed.** The roasters' product
+descriptions and listing-card text are their own copy, so they are not in
+this repo: the committed files keep product IDs, titles, prices, pack sizes,
+the hand labels, and the LLM's attributes with short evidence quotes. The
+analysis runs entirely from those. Re-running an LLM step (extraction,
+matching, the labelling workbook) needs the text, so it needs a fresh
+scrape first: `python -m src.collect stage1`, then
+`python -m src.product_inputs`, which writes the text to git-ignored
+`data/local/`. Live descriptions will be whatever the shops show today, so
+LLM results may differ slightly from the committed ones. A test
+(`tests/test_no_shop_text.py`) fails if the text ever reaches a committed file.
 
 **Full rebuild** (slow: fetches from the Wayback Machine at a polite rate;
 the LLM step needs `GEMINI_API_KEY` in `.env`):

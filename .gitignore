@@ -12,6 +12,10 @@ data/cache/
 data/review_queue.jsonl
 # Half-written tracker outputs (src/tracker/run.py swaps them in, or deletes them).
 *.tmp
+*.bak
+# Product descriptions and listing-card text from the shops: kept locally for the
+# LLM steps, never redistributed (see README "Reproduce").
+data/local/
 
 # --- Python ---
 .venv/
