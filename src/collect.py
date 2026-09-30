@@ -213,19 +213,25 @@ def collect_archive(roaster: dict, handles: Handles) -> tuple[list[dict], list[d
 
 # ---------- live products.json ----------
 
-def collect_live(roaster: dict, handles: Handles) -> tuple[list[dict], dict]:
+def live_page_url(live_url: str, page: int) -> str:
+    parts = urlsplit(live_url)
+    return f"{parts.scheme}://{parts.netloc}{parts.path}/products.json?limit=250&page={page}"
+
+
+def collect_live(roaster: dict, handles: Handles, snapshot: str | None = None) -> tuple[list[dict], dict]:
     """Current prices from the collection's products.json, labelled as today's quarter.
 
     The collection-scoped endpoint (/collections/<handle>/products.json) keeps the
     same product scope as the archived listing; /products.json would add equipment.
+    snapshot: the live tracker's month label ("2026-10"), passed to the cache so
+    each month is fetched once and kept (see http_client._cache_paths).
     """
-    parts = urlsplit(roaster["live_url"])
     label = quarter_of_date(date.today())
     raw, fetched_at = [], ""   # rows are finished after all pages are read (see below)
     for page in range(1, LIVE_MAX_PAGES + 1):
-        url = f"{parts.scheme}://{parts.netloc}{parts.path}/products.json?limit=250&page={page}"
-        products = json.loads(http_client.fetch(url)).get("products", [])
-        fetched_at = fetched_at or (http_client.cached_meta(url) or {}).get("fetched_at", "")
+        url = live_page_url(roaster["live_url"], page)
+        products = json.loads(http_client.fetch(url, snapshot=snapshot)).get("products", [])
+        fetched_at = fetched_at or (http_client.cached_meta(url, snapshot) or {}).get("fetched_at", "")
         if not products:
             break
         for p in products:

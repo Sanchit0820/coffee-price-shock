@@ -1,0 +1,12 @@
+month,roaster,tier,status,coffee_products,attributes_pending,price_up,price_down,pack_size_change,added,dropped,same_product_change_pct,index,big_drop
+2026-09,Third Wave Coffee,core,already_fetched,7,0,0,0,0,0,0,,100.0,False
+2026-09,Devans,core,already_fetched,21,0,0,0,0,0,0,,100.0,False
+2026-09,Blue Tokai,core,already_fetched,37,0,0,0,0,0,0,,100.0,False
+2026-09,Grey Soul,core,already_fetched,11,0,0,0,0,0,0,,100.0,False
+2026-09,Kapi Kottai,core,already_fetched,8,0,0,0,0,0,0,,100.0,False
+2026-09,Araku,core,already_fetched,6,0,0,0,0,0,0,,100.0,False
+2026-09,Corridor Seven,core,already_fetched,15,0,0,0,0,0,0,,100.0,False
+2026-09,Black Baza,secondary,already_fetched,14,0,0,0,0,0,0,,100.0,False
+2026-09,Dope Coffee,secondary,already_fetched,9,0,0,0,0,0,0,,100.0,False
+2026-09,Bloom,secondary,already_fetched,25,0,0,0,0,0,0,,100.0,False
+2026-09,Subko,secondary,already_fetched,7,0,0,0,0,0,0,,100.0,False

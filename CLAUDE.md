@@ -59,13 +59,23 @@ data/raw, data/clean, src/, notebooks/, outputs/
   exclude `is_bundle` rows from price-per-gram analysis; follow a coffee over time
   with `product_keys_by_quarter.csv` (split at page reuse), never raw product_id;
   use `attributes_valid` before attaching attributes to a product-quarter.
+- Phase 6 live tracker (`src/tracker/`, `.github/workflows/tracker.yml`, monthly):
+  `snapshot.py` (robots re-check, products.json cached per month via
+  `http_client.fetch(url, snapshot="YYYY-MM")`) -> `data/clean/live_monthly.csv`;
+  `attributes.py` (Gemini on unseen products only; ANY API error incl. quota -> "pending");
+  `analysis.py` -> `outputs/tracker/`; `run.py` builds everything, checks, then swaps
+  files in (nothing written on failure); `check_history.py` fails if the 2023-2026Q3
+  tables change. The tracker never writes Phase 2-5 files. Roaster on/off switch:
+  `data/tracker_settings.csv`.
 - Review queue: `data/review_queue.jsonl`; LLM cache: `data/cache/llm/`
 - Tests: `pytest` from the project root; network and LLM are faked
 - Shell is Windows PowerShell 5.1: don't rewrite files with Get-Content/Set-Content
   (it mangles UTF-8); use the editor tools
 
 ## Current phase
-Phase 4 (analysis) in progress. Phase 3 closed 2026-09-30.
+Phase 6 (live tracker) built 2026-09-30; seeded with the 2026-09 live snapshot, first
+real fetch on the October run. Phase 5 (README, docs/writeup.md) done.
+Phase 4 (analysis) done. Phase 3 closed 2026-09-30.
 Process/lot-word rule for the title-change check: approved and applied
 (`is_different_coffee` in src/product_inputs.py).
 Phase 4 first run 2026-09-30: `python -m src.analysis.run` -> outputs/*.png,

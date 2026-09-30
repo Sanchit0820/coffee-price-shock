@@ -37,28 +37,35 @@ class DisallowedByRobots(Exception):
 
 # ---------- cache ----------
 
-def _cache_paths(url: str):
+def _cache_paths(url: str, snapshot: str | None = None):
     """Map a URL to (body_path, meta_path) under data/raw/<host>/.
 
     File names are a hash of the full URL, because URLs contain characters
     (?, :, /) that are not valid in Windows file names.
+
+    snapshot (e.g. "2026-10"): for pages that change over time and are kept as a
+    dated series (the live tracker's monthly products.json). Each snapshot gets
+    its own folder, so this month's copy never overwrites last month's, and
+    fetching the same URL again in the same month reads the cache.
     """
     host = urlsplit(url).netloc.replace(":", "_")
     key = hashlib.sha256(url.encode("utf-8")).hexdigest()[:24]
     folder = config.RAW_DIR / host
+    if snapshot:
+        folder = folder / "snapshots" / snapshot
     return folder / f"{key}.body", folder / f"{key}.meta.json"
 
 
-def _read_cache(url: str) -> bytes | None:
-    body_path, meta_path = _cache_paths(url)
+def _read_cache(url: str, snapshot: str | None = None) -> bytes | None:
+    body_path, meta_path = _cache_paths(url, snapshot)
     # Require both files: a body without meta means a write was interrupted.
     if body_path.exists() and meta_path.exists():
         return body_path.read_bytes()
     return None
 
 
-def _write_cache(url: str, response: requests.Response) -> None:
-    body_path, meta_path = _cache_paths(url)
+def _write_cache(url: str, response: requests.Response, snapshot: str | None = None) -> None:
+    body_path, meta_path = _cache_paths(url, snapshot)
     body_path.parent.mkdir(parents=True, exist_ok=True)
     body_path.write_bytes(response.content)
     meta = {
@@ -72,9 +79,14 @@ def _write_cache(url: str, response: requests.Response) -> None:
     meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
 
-def cached_meta(url: str) -> dict | None:
+def cached_body(url: str, snapshot: str | None = None) -> bytes | None:
+    """The cached body of `url` (None if not cached). Never touches the network."""
+    return _read_cache(url, snapshot)
+
+
+def cached_meta(url: str, snapshot: str | None = None) -> dict | None:
     """The metadata saved with a cached response (final_url, fetched_at, ...), if cached."""
-    _, meta_path = _cache_paths(url)
+    _, meta_path = _cache_paths(url, snapshot)
     if not meta_path.exists():
         return None
     return json.loads(meta_path.read_text(encoding="utf-8"))
@@ -131,15 +143,17 @@ def robots_check(url: str) -> tuple[bool, str]:
     return robots.can_fetch(USER_AGENT, url), _robots_status[urlsplit(url).netloc]
 
 
-def fetch(url: str, refresh: bool = False, timeout: float = 30) -> bytes:
+def fetch(url: str, refresh: bool = False, timeout: float = 30, snapshot: str | None = None) -> bytes:
     """Return the body of `url`, from cache if possible, else politely from the web.
 
     refresh=True skips the cache and re-downloads, overwriting the cached copy.
     Use it only for data that changes over time (e.g. Wayback snapshot lists),
     never for pages we want frozen as evidence.
+    snapshot="2026-10" caches under that label instead (see _cache_paths): a new
+    label fetches afresh, and older snapshots are never overwritten.
     timeout is in seconds; raise it for slow services like the Wayback CDX API.
     """
-    cached = None if refresh else _read_cache(url)
+    cached = None if refresh else _read_cache(url, snapshot)
     if cached is not None:
         return cached
 
@@ -153,5 +167,5 @@ def fetch(url: str, refresh: bool = False, timeout: float = 30) -> bytes:
 
     response = _session.get(url, timeout=timeout)
     response.raise_for_status()  # 4xx/5xx -> exception, and nothing is cached
-    _write_cache(url, response)
+    _write_cache(url, response, snapshot)
     return response.content

@@ -135,9 +135,62 @@ regression (chart 4) and price level vs repricing (chart 5).
 
 - **Measure demand.** Get sales or volume data from a roaster to see how
   customers responded to the price steps, pack cuts and range changes.
-- **Run it monthly.** Schedule the pipeline to run every month as a live
-  competitor price tracker, flagging same-product price rises, pack-size cuts
-  and range changes as they happen.
+- **Run it monthly.** The live tracker below now collects prices every month.
+  Next would be adding green-coffee costs to it, so it can report pass-through
+  as it happens.
+
+## Live tracker
+
+<!-- tracker:last-run -->
+**Last run: 2026-09-30** (snapshot 2026-09). Roasters fetched: 0; already had this month's data: 11; skipped by robots.txt: 0; switched off: 0; failed: 0. New products this run: 0; attributes pending: 0.
+<!-- /tracker:last-run -->
+
+A GitHub Actions workflow ([.github/workflows/tracker.yml](.github/workflows/tracker.yml))
+runs on the 1st of every month, and can be started by hand from the Actions tab.
+It:
+
+1. re-reads each roaster's robots.txt and skips any roaster that disallows
+   access (or whose robots.txt can't be read);
+2. fetches each roaster's live `products.json`, with the same rate limits as
+   the rest of the project, and appends the month to
+   `data/clean/live_monthly.csv`;
+3. asks Gemini for the attributes of products it hasn't seen before. The key
+   comes from GitHub Secrets and is a free-tier key with no billing, so the
+   tracker can't incur charges. If the API fails for any reason, including
+   running out of quota, those products are marked "pending" and retried next
+   month;
+4. rebuilds the tracker tables and chart in `outputs/tracker/`, and checks
+   that the historical analysis still reproduces exactly;
+5. commits the results as "Live tracker: YYYY-MM snapshot".
+
+If a step fails, the run logs an error and stops before anything is written
+or committed.
+
+**Some roasters' sites block cloud servers.** A roaster skipped or failing in
+GitHub Actions doesn't mean the scraper is broken: the same request often
+works from a home connection. Each month's outcome per roaster is in
+`data/clean/live_monthly_status.csv`.
+
+**What changes every month**
+
+- `data/clean/live_monthly.csv`: one row per variant per month. The first
+  month (2026-09) is the live snapshot used by the historical analysis.
+- `outputs/tracker/`: same-product price index by month
+  (`tracker_index.csv`, `tracker_index.png`), this month's changes
+  (`tracker_changes.csv`: price rises and cuts, pack-size changes, products
+  added and dropped), and a per-roaster summary (`tracker_summary.csv`).
+- Attributes for new products (`data/clean/tracker_attributes.csv`) and
+  anything needing a person (`data/review/tracker_review.csv`).
+- The "Last run" line above.
+
+**What stays fixed**
+
+- The 2023–2026Q3 analysis: `outputs/tables/`, charts 1–5, every number in
+  this README's findings and in [docs/writeup.md](docs/writeup.md). The
+  tracker never writes to those files, and every run fails if they would
+  come out differently.
+- Green-coffee costs and CPI are not updated by the tracker. They're manual
+  downloads, as before.
 
 ## Reproduce
 
@@ -173,6 +226,13 @@ python -m src.extract_attributes run       #   attributes (LLM, cached)
 python -m src.matching                     #   links across product-ID changes (LLM, cached)
 python -m src.product_keys                 #   follow each coffee over time
 python -m src.analysis.run                 # Phase 4: analysis
+```
+
+**Live tracker, locally** (what the monthly workflow runs):
+
+```powershell
+python -m src.tracker.run                  # this month's snapshot (--no-llm to skip Gemini)
+python -m src.tracker.check_history        # historical tables still reproduce exactly
 ```
 
 ## Layout

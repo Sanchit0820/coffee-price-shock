@@ -10,6 +10,8 @@ data/raw/*
 # Cached LLM responses and the review queue are regenerable working files.
 data/cache/
 data/review_queue.jsonl
+# Half-written tracker outputs (src/tracker/run.py swaps them in, or deletes them).
+*.tmp
 
 # --- Python ---
 .venv/

@@ -1,0 +1,14 @@
+# What the monthly GitHub Actions tracker needs (no Jupyter). Versions are pinned
+# to the ones the project was built and checked with, so the Linux runner
+# reproduces the historical tables exactly (src/tracker/check_history.py).
+python-dotenv==1.2.3
+requests==2.34.2
+beautifulsoup4==4.15.0
+lxml==6.1.3
+pandas==3.0.6
+numpy==2.5.3
+openpyxl==3.1.5
+matplotlib==3.11.2
+pydantic==2.13.5
+google-genai==2.25.0
+pytest==9.1.1
