@@ -1,1 +1,2 @@
-
+roaster,product_id,ref,status,is_coffee,is_coffee_confidence,is_coffee_evidence,origin_country,origin_country_confidence,origin_country_evidence,region,region_confidence,region_evidence,estate,estate_confidence,estate_evidence,species,species_confidence,species_evidence,origin_type,origin_type_confidence,origin_type_evidence,process,process_confidence,process_evidence,roast_level,roast_level_confidence,roast_level_evidence,decaf,decaf_confidence,decaf_evidence,flavoured_infused,flavoured_infused_confidence,flavoured_infused_evidence,model,prompt_version,batch_size,attempted_month
+Grey Soul,8917465923781,t0,pending,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,attrs-v2,5,2026-10

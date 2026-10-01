@@ -142,7 +142,7 @@ regression (chart 4) and price level vs repricing (chart 5).
 ## Live tracker
 
 <!-- tracker:last-run -->
-**Last run: 2026-09-30** (snapshot 2026-09). Roasters fetched: 0; already had this month's data: 11; skipped by robots.txt: 0; switched off: 0; failed: 0. New products this run: 0; attributes pending: 0.
+**Last run: 2026-10-01** (snapshot 2026-10). Roasters fetched: 11; already had this month's data: 0; skipped by robots.txt: 0; switched off: 0; failed: 0. New products this run: 1; attributes pending: 1.
 <!-- /tracker:last-run -->
 
 A GitHub Actions workflow ([.github/workflows/tracker.yml](.github/workflows/tracker.yml))
